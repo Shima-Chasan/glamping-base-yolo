@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>glamping base YOLO - 星空とジャングルで、ととのう休暇を。</title>
+    <meta name="description" content="沖縄北部、今帰仁村の自然に囲まれたグランピング施設。ファンシーで快適なテントでの宿泊、BBQ、プール、サウナを楽しめます。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        turquoise: '#1EC2C8',
+                        sunset: '#FF9B6A',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- カスタムCSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-white text-gray-800">
+>
+<!-- ナビゲーション -->
+<nav class="bg-white shadow-md fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <a href="index.html" class="font-playfair text-2xl font-bold text-turquoise">glamping base YOLO</a>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="hover:text-turquoise">施設紹介</a>
+                <a href="#services" class="hover:text-turquoise">サービス</a>
+                <a href="#rooms" class="hover:text-turquoise">客室・設備</a>
+                <a href="#booking" class="hover:text-turquoise">予約</a>
+                <a href="#faq" class="hover:text-turquoise">FAQ</a>
+                <a href="#access" class="hover:text-turquoise">アクセス</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-500 hover:text-turquoise focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- モバイルメニュー -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="#about" class="block px-3 py-2 hover:bg-turquoise hover:text-white rounded">施設紹介</a>
+            <a href="#services" class="block px-3 py-2 hover:bg-turquoise hover:text-white rounded">サービス</a>
+            <a href="#rooms" class="block px-3 py-2 hover:bg-turquoise hover:text-white rounded">客室・設備</a>
+            <a href="#booking" class="block px-3 py-2 hover:bg-turquoise hover:text-white rounded">予約</a>
+            <a href="#faq" class="block px-3 py-2 hover:bg-turquoise hover:text-white rounded">FAQ</a>
+            <a href="#access" class="block px-3 py-2 hover:bg-turquoise hover:text-white rounded">アクセス</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero セクション -->
+<section id="hero" class="hero-section" style="background-image: url('images/ドーム外観.png');">
+    <div class="hero-content max-w-7xl mx-auto px-4 text-center">
+        <h1 class="font-playfair text-4xl md:text-6xl font-bold text-white tracking-wide uppercase mb-4">glamping base YOLO</h1>
+        <p class="text-xl md:text-3xl text-white mb-8">星空とジャングルで、ととのう休暇を。</p>
+        <a href="#booking" class="bg-sunset hover:bg-orange-600 text-white rounded-full px-6 py-3 shadow-lg inline-block transition duration-300">空室を確認する</a>
+    </div>
+</section>
+<!-- お知らせ -->
+<section id="news" class="py-20 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="font-playfair text-3xl md:text-4xl font-bold tracking-wide uppercase mb-2">News</h2>
+            <p class="text-xl font-semibold text-gray-700">お知らせ</p>
+        </div>
+        
+        <div class="max-w-3xl mx-auto">
+            <div class="space-y-8">
+                <!-- お知らせアイテム1 -->
+                <div class="border-b border-gray-200 pb-6">
+                    <div class="flex items-center mb-2">
+                        <span class="text-turquoise font-semibold mr-4">2025.05.14</span>
+                        <h3 class="text-xl font-semibold">LINE公式アカウントを開設しました</h3>
+                    </div>
+                    <p class="text-gray-600">最新情報やお得な情報をいち早くお届けします</p>
+                </div>
+                
+                <!-- お知らせアイテム2 -->
+                <div class="border-b border-gray-200 pb-6">
+                    <div class="flex items-center mb-2">
+                        <span class="text-turquoise font-semibold mr-4">2025.05.13</span>
+                        <h3 class="text-xl font-semibold">クラウドファンディング支援の受付を開始しました</h3>
+                    </div>
+                    <p class="text-gray-600">無料相談も随時受付中です</p>
+                </div>
+                
+                <!-- お知らせアイテム3 -->
+                <div class="border-b border-gray-200 pb-6">
+                    <div class="flex items-center mb-2">
+                        <span class="text-turquoise font-semibold mr-4">2025.05.01</span>
+                        <h3 class="text-xl font-semibold">6月の定休日のお知らせ</h3>
+                    </div>
+                    <p class="text-gray-600">6月の定休日は毎週水曜日となります。ご予約の際はご注意ください。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 施設紹介 -->
+<section id="about" class="py-20 scroll-mt-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="font-playfair text-3xl md:text-4xl font-bold tracking-wide uppercase mb-2">About Us</h2>
+            <p class="text-xl font-semibold text-gray-700">施設紹介</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row gap-8 mb-16">
+            <div class="md:w-1/2 flex justify-center">
+                <img src="images/コテージ外観.jpeg" alt="グランピング施設の外観" class="rounded-lg shadow-lg w-3/4 h-auto object-cover" loading="lazy">
+            </div>
+            <div class="md:w-1/2 flex items-center">
+                <div>
+                    <p class="text-lg mb-6 leading-relaxed">
+                        沖縄北部にある”新テーマパーク”ジャングリアに近い、今帰仁村の自然に囲まれた場所に佇む当施設は、ファンシーで快適なテントでの宿泊が可能。キャンプ好きはもちろんキャンプ未経験者、家族や友人、１グループで気軽に星空の下でBBQ、プール、サウナを楽しむことが出来ます。
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#booking" class="bg-turquoise hover:bg-teal-500 text-white px-5 py-2 rounded-md inline-block transition">予約する</a>
+                        <a href="#services" class="border border-turquoise text-turquoise hover:bg-turquoise hover:text-white px-5 py-2 rounded-md inline-block transition">サービスを見る</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- サービス紹介（料金） -->
+<section id="services" class="py-20 bg-gray-50 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="font-playfair text-3xl md:text-4xl font-bold tracking-wide uppercase mb-2">Services</h2>
+            <p class="text-xl font-semibold text-gray-700">サービス紹介</p>
+        </div>
+        
+        <!-- サービスカード -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <!-- 宿泊 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:-translate-y-1 hover:shadow-xl">
+                <div class="h-48 overflow-hidden">
+                    <img src="images/ベッド.png" alt="宿泊施設" class="w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold mb-2">宿泊</h3>
+                    <p class="text-gray-600">ファンシーで快適なテントでの宿泊体験</p>
+                </div>
+            </div>
+            
+            <!-- BBQ -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:-translate-y-1 hover:shadow-xl">
+                <div class="h-48 overflow-hidden">
+                    <img src="images/バーベキュー.jpeg" alt="BBQ" class="w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold mb-2">BBQ</h3>
+                    <p class="text-gray-600">星空の下で楽しむバーベキュー</p>
+                </div>
+            </div>
+            
+            <!-- プール -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:-translate-y-1 hover:shadow-xl">
+                <div class="h-48 overflow-hidden">
+                    <img src="images/プール.jpeg" alt="プール" class="w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold mb-2">プール</h3>
+                    <p class="text-gray-600">南国気分を満喫できるプール</p>
+                </div>
+            </div>
+            
+            <!-- サウナ -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:-translate-y-1 hover:shadow-xl">
+                <div class="h-48 overflow-hidden">
+                    <img src="images/サウナ.jpeg" alt="サウナ" class="w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-semibold mb-2">サウナ</h3>
+                    <p class="text-gray-600">ととのう極上のサウナ体験</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 料金表 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+            <div class="bg-turquoise text-white p-4">
+                <h3 class="text-xl font-semibold text-center">料金プラン</h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="price-table w-full">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="px-4 py-3 text-left">プラン</th>
+                            <th class="px-4 py-3 text-left">内容</th>
+                            <th class="px-4 py-3 text-left">料金</th>
+                            <th class="px-4 py-3 text-left">備考</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border-t px-4 py-3">オープン記念 1棟貸切</td>
+                            <td class="border-t px-4 py-3">サウナ付き・定員5名</td>
+                            <td class="border-t px-4 py-3">¥45,000 / 泊</td>
+                            <td class="border-t px-4 py-3">6名以上 +¥5,000/人（6歳未満無料）</td>
+                        </tr>
+                        <tr>
+                            <td class="border-t px-4 py-3">ガス BBQ グリル</td>
+                            <td class="border-t px-4 py-3">一式レンタル</td>
+                            <td class="border-t px-4 py-3">¥3,500 / 泊</td>
+                            <td class="border-t px-4 py-3">2泊目〜 ¥1,000 / 泊</td>
+                        </tr>
+                        <tr>
+                            <td class="border-t px-4 py-3">プール利用</td>
+                            <td class="border-t px-4 py-3">宿泊者専用</td>
+                            <td class="border-t px-4 py-3">無料</td>
+                            <td class="border-t px-4 py-3">10:00-18:00</td>
+                        </tr>
+                        <tr>
+                            <td class="border-t px-4 py-3">サウナ追加利用</td>
+                            <td class="border-t px-4 py-3">水風呂・休憩スペース付</td>
+                            <td class="border-t px-4 py-3">¥2,000 / 2時間</td>
+                            <td class="border-t px-4 py-3">予約制（14:00-22:00）</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-4 bg-gray-50 text-sm text-gray-600">
+                ※ 料金は税込み表示です。季節により変動する場合があります。
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 客室・設備 -->
+<section id="rooms" class="py-20 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="font-playfair text-3xl md:text-4xl font-bold tracking-wide uppercase mb-2">Accommodations</h2>
+            <p class="text-xl font-semibold text-gray-700">客室・設備</p>
+        </div>
+        
+        <!-- 客室画像 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div>
+                <img src="https://images.unsplash.com/photo-1562182384-08115de5ee97?ixlib=rb-4.0.3" alt="テント内部" class="rounded-lg shadow-lg w-full h-64 object-cover" loading="lazy">
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1537225228614-56cc3556d7ed?ixlib=rb-4.0.3" alt="テント外観" class="rounded-lg shadow-lg w-full h-64 object-cover" loading="lazy">
+            </div>
+        </div>
+        
+        <!-- ベッド構成 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-12">
+            <h3 class="text-xl font-semibold mb-4 text-center">ベッド構成</h3>
+            <ul class="space-y-2">
+                <li class="flex items-center">
+                    <i class="fas fa-bed text-turquoise mr-3"></i>
+                    <span>セミダブル 2台</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-bunk-bed text-turquoise mr-3"></i>
+                    <span>二段ベッド 1台</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-couch text-turquoise mr-3"></i>
+                    <span>シングルソファベッド 2台</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-campground text-turquoise mr-3"></i>
+                    <span>赤ちゃん用テント 1張</span>
+                </li>
+            </ul>
+            <p class="mt-4 text-sm text-gray-600">※ 最大8名様までご宿泊いただけます。</p>
+        </div>
+        
+        <!-- アメニティと備品 -->
+        <div>
+            <h3 class="text-xl font-semibold mb-6 text-center">アメニティと備品</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Wi-Fi -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <p>Wi-Fi</p>
+                </div>
+                
+                <!-- エアコン -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <p>エアコン</p>
+                </div>
+                
+                <!-- 冷蔵庫 -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-temperature-low"></i>
+                    </div>
+                    <p>冷蔵庫</p>
+                </div>
+                
+                <!-- 電子レンジ -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-microwave"></i>
+                    </div>
+                    <p>電子レンジ</p>
+                </div>
+                
+                <!-- ドライヤー -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <p>ドライヤー</p>
+                </div>
+                
+                <!-- タオル -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-bath"></i>
+                    </div>
+                    <p>タオル</p>
+                </div>
+                
+                <!-- シャンプー -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-pump-soap"></i>
+                    </div>
+                    <p>シャンプー</p>
+                </div>
+                
+                <!-- 歯ブラシ -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-toothbrush"></i>
+                    </div>
+                    <p>歯ブラシ</p>
+                </div>
+                
+                <!-- コーヒーメーカー -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <p>コーヒー</p>
+                </div>
+                
+                <!-- 駐車場 -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-parking"></i>
+                    </div>
+                    <p>駐車場</p>
+                </div>
+                
+                <!-- BBQセット -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <p>BBQセット</p>
+                </div>
+                
+                <!-- 虫よけ -->
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <p>虫よけ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 予約・問い合わせ -->
+<section id="booking" class="py-20 bg-gray-50 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="font-playfair text-3xl md:text-4xl font-bold tracking-wide uppercase mb-2">Reservations</h2>
+            <p class="text-xl font-semibold text-gray-700">予約・問い合わせ</p>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 問い合わせフォーム -->
+            <div class="lg:w-1/2">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">お問い合わせ</h3>
+                    <form id="contact-form" name="contact" method="POST" data-netlify="true">
+                        <input type="hidden" name="form-name" value="contact">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 mb-2">お名前 <span class="text-red-500">*</span></label>
+                            <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
+                            <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                        </div>
+                        <div class="mb-4">
+                            <label for="phone" class="block text-gray-700 mb-2">電話番号</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-700 mb-2">お問い合わせ内容 <span class="text-red-500">*</span></label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-turquoise hover:bg-teal-500 text-white px-6 py-2 rounded-md transition">送信する</button>
+                        </div>
+                        <p id="form-status" class="mt-4 text-center hidden"></p>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- 空室状況 -->
+            <div class="lg:w-1/2">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">空室状況</h3>
+                    <div class="mb-4 bg-gray-100 p-4 rounded">
+                        <p class="text-sm text-gray-600 mb-2">以下のカレンダーで空室状況をご確認いただけます。</p>
+                        <p class="text-sm text-gray-600">予約は3ヶ月先まで受け付けております。</p>
+                    </div>
+                    <!-- ダミーのGoogleカレンダー埋め込み -->
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded">
+                        <div class="flex items-center justify-center h-full">
+                            <p class="text-gray-500">
+                                <i class="far fa-calendar-alt text-4xl mb-2 block"></i>
+                                Googleカレンダーが表示されます
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- キャンセルポリシー -->
+                    <div class="mt-6">
+                        <h4 class="font-semibold mb-2">キャンセルポリシー</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-sm text-gray-700">
+                            <li>ご予約日の14日前まで：無料</li>
+                            <li>ご予約日の13日前～7日前：宿泊料金の30%</li>
+                            <li>ご予約日の6日前～2日前：宿泊料金の50%</li>
+                            <li>ご予約日の前日：宿泊料金の80%</li>
+                            <li>ご予約日当日・不泊：宿泊料金の100%</li>
+                        </ul>
+                        <p class="mt-2 text-sm text-gray-600">※ 台風などの自然災害の場合は、状況に応じて対応いたします。</p>
+                    </div>
+                    
+                    <!-- 予約ボタン -->
+                    <div class="mt-6 text-center">
+                        <a href="https://example.com/booking" target="_blank" class="bg-sunset hover:bg-orange-600 text-white rounded-full px-6 py-3 shadow-lg inline-block transition duration-300">
+                            <i class="fas fa-calendar-check mr-2"></i>予約サイトへ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FAQ / ご利用ルール -->
+<section id="faq" class="py-20 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="font-playfair text-3xl md:text-4xl font-bold tracking-wide uppercase mb-2">FAQ</h2>
+            <p class="text-xl font-semibold text-gray-700">よくあるご質問・ご利用ルール</p>
+        </div>
+        
+        <!-- FAQ -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-12">
+            <h3 class="text-xl font-semibold mb-6">よくあるご質問</h3>
+            
+            <div class="space-y-4">
+                <!-- FAQ項目1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4 class="font-medium">チェックイン・チェックアウト時間は何時ですか？</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer hidden">
+                        <p class="text-gray-700">チェックインは15:00〜19:00、チェックアウトは11:00となっております。事前にご連絡いただければ、チェックイン時間の変更にも対応可能です。</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ項目2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4 class="font-medium">ペットは連れて行けますか？</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer hidden">
+                        <p class="text-gray-700">申し訳ございませんが、ペットの同伴はご遠慮いただいております。</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ項目3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4 class="font-medium">食事は提供されますか？</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer hidden">
+                        <p class="text-gray-700">食事の提供はございませんが、BBQセットのレンタルや、近隣のレストラン情報をご案内しております。また、敷地内には簡易的な調理設備もございます。</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ項目4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4 class="font-medium">雨天時のキャンセルは可能ですか？</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer hidden">
+                        <p class="text-gray-700">通常の雨天によるキャンセルは、キャンセルポリシーに準じます。ただし、台風などの警報が発令されている場合は、状況に応じて対応いたしますので、お問い合わせください。</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ項目5 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4 class="font-medium">Wi-Fiはありますか？</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer hidden">
+                        <p class="text-gray-700">はい、全テントでWi-Fiをご利用いただけます。自然の中でのデジタルデトックスもおすすめですが、必要に応じてご利用ください。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ご利用ルール -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-semibold mb-6">ご利用ルール</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-medium mb-3 flex items-center">
+                        <i class="fas fa-times-circle text-red-500 mr-2"></i>禁止事項
+                    </h4>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
+                            <span>ペットの同伴</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
+                            <span>大声での会話や音楽（特に21:00〜7:00）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
+                            <span>花火や打ち上げ花火の使用</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
+                            <span>指定場所以外での喫煙</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
+                            <span>定員を超える宿泊</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-medium mb-3 flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>お願い事項
+                    </h4>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
+                            <span>ゴミの分別にご協力ください</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
+                            <span>21:00〜7:00は静かにお過ごしください</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
+                            <span>施設・備品を破損された場合はお申し出ください</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
+                            <span>チェックアウト時は原状回復にご協力ください</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
+                            <span>貴重品の管理は各自でお願いいたします</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- アクセス & 駐車場 -->
+<section id="access" class="py-20 bg-gray-50 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="font-playfair text-3xl md:text-4xl font-bold tracking-wide uppercase mb-2">Access</h2>
+            <p class="text-xl font-semibold text-gray-700">アクセス & 駐車場</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row gap-8">
+            <div class="md:w-1/2">
+                <!-- Google Map -->
+                <div class="bg-gray-200 rounded-lg overflow-hidden h-80 mb-6">
+                    <!-- ダミーのGoogle Map iframe -->
+                    <div class="w-full h-full flex items-center justify-center">
+                        <p class="text-gray-500">
+                            <i class="fas fa-map-marker-alt text-4xl mb-2 block text-center"></i>
+                            Google Mapが表示されます
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">アクセス情報</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium flex items-center">
+                                <i class="fas fa-map-marker-alt text-turquoise mr-2"></i>住所
+                            </h4>
+                            <p class="ml-6 text-gray-700">〒905-0428 沖縄県今帰仁村字今泊1234</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium flex items-center">
+                                <i class="fas fa-car text-turquoise mr-2"></i>お車でお越しの場合
+                            </h4>
+                            <ul class="ml-6 space-y-1 text-gray-700">
+                                <li>那覇空港から車で約90分</li>
+                                <li>名護市中心部から車で約30分</li>
+                                <li>沖縄自動車道・許田ICから約20分</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium flex items-center">
+                                <i class="fas fa-bus text-turquoise mr-2"></i>公共交通機関でお越しの場合
+                            </h4>
+                            <ul class="ml-6 space-y-1 text-gray-700">
+                                <li>那覇バスターミナルから高速バスで名護バスターミナルまで約2時間</li>
+                                <li>名護バスターミナルから路線バスで「今帰仁入口」下車、徒歩15分</li>
+                                <li>※事前にご連絡いただければ、バス停までの送迎も可能です</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium flex items-center">
+                                <i class="fas fa-parking text-turquoise mr-2"></i>駐車場
+                            </h4>
+                            <ul class="ml-6 space-y-1 text-gray-700">
+                                <li>敷地内に4台分の無料駐車スペースあり</li>
+                                <li>大型車の場合は事前にご相談ください</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- フッター -->
+<footer class="bg-gray-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+            <div class="mb-6 md:mb-0">
+                <h2 class="font-playfair text-2xl font-bold mb-2">glamping base YOLO</h2>
+                <p class="text-gray-400">星空とジャングルで、ととのう休暇を。</p>
+            </div>
+            
+            <div class="flex flex-col space-y-2">
+                <div class="flex items-center">
+                    <i class="fas fa-phone text-turquoise mr-2"></i>
+                    <span>0980-12-3456</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-envelope text-turquoise mr-2"></i>
+                    <span>info@glamping-okinawa.example.com</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-700">
+            <div class="mb-4 md:mb-0">
+                <p class="text-sm text-gray-400">&copy; 2025 glamping base YOLO. All rights reserved.</p>
+            </div>
+            
+            <div class="flex space-x-4">
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
