@@ -29,6 +29,56 @@
         }
     </script>
     
+    <!-- スライドショー用のスタイル -->
+    <style>
+        .slideshow-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .fade {
+            animation-name: fade;
+            animation-duration: 15s;
+            animation-iteration-count: infinite;
+        }
+
+        .slide:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .slide:nth-child(2) {
+            animation-delay: 5s;
+        }
+
+        .slide:nth-child(3) {
+            animation-delay: 10s;
+        }
+
+        @keyframes fade {
+            0%, 30% { opacity: 1; }
+            33%, 97% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        /* 多重ドロップシャドウスタイル */
+        .hero-text {
+            text-shadow: 
+                0 1px 0 #000,
+                1px 1px 0 #000,
+                1px 2px 1px rgba(0,0,0,0.6),
+                1px 3px 1px rgba(0,0,0,0.6),
+                2px 4px 2px rgba(0,0,0,0.4),
+                2px 5px 3px rgba(0,0,0,0.4),
+                3px 6px 5px rgba(0,0,0,0.3);
+        }
+    </style>
+    
     <!-- カスタムCSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -101,11 +151,25 @@
 </nav>
 
 <!-- Hero セクション -->
-<section id="hero" class="hero-section" style="background-image: url('images/dome-exterior.png');">
-    <div class="hero-content max-w-7xl mx-auto px-4 text-center">
-        <h1 class="font-playfair text-4xl md:text-6xl font-bold text-white tracking-wide uppercase mb-4">You Only Live Once</h1>
-        <p class="text-xl md:text-3xl text-white mb-8">最高の「今」を、沖縄の星空の下で。</p>
-        <a href="#booking" class="bg-sunset text-white rounded-full px-6 py-3 shadow-lg inline-block hover:scale-105 transition duration-300">空室を確認する</a>
+<section id="hero" class="hero-section relative overflow-hidden">
+    <!-- スライドショー用の画像コンテナ -->
+    <div class="slideshow-container absolute inset-0 w-full h-full">
+        <div class="slide fade absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('images/sea1.jpeg');"></div>
+        <div class="slide fade absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('images/sea2.jpeg');"></div>
+        <div class="slide fade absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('images/sea&amp;tree.jpeg');"></div>
+    </div>
+    
+    <!-- コンテンツ -->
+    <div class="hero-content relative z-10 max-w-7xl mx-auto px-4 text-center py-32">
+        <h1 class="font-playfair text-4xl md:text-6xl font-bold text-white tracking-wide uppercase mb-4 hero-text">
+            You Only Live Once
+        </h1>
+        <p class="text-xl md:text-3xl text-white mb-8 hero-text">
+            最高の「今」を、沖縄の星空の下で。
+        </p>
+        <a href="#booking" class="bg-sunset text-white rounded-full px-6 py-3 shadow-lg inline-block hover:scale-105 transition duration-300">
+            空室を確認する
+        </a>
     </div>
 </section>
 <!-- お知らせ -->
