@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="font-playfair text-3xl md:text-4xl font-bold tracking-wide uppercase mb-2">Reservations</h2>
-            <p class="text-xl font-semibold text-gray-700">予約・問い合わせ</p>
+            <p class="text-xl font-semibold text-gray-700">ご予約・お問い合わせ</p>
         </div>
         
         <div class="flex flex-col lg:flex-row gap-8">
@@ -43,7 +43,7 @@
                     <h3 class="text-xl font-semibold mb-4">空室状況</h3>
                     <div class="mb-4 bg-gray-100 p-4 rounded">
                         <p class="text-sm text-gray-600 mb-2">以下のカレンダーで空室状況をご確認いただけます。</p>
-                        <p class="text-sm text-gray-600">予約は3ヶ月先まで受け付けております。</p>
+                        <p class="text-sm text-gray-600">予約は4ヶ月先まで受け付けております。</p>
                     </div>
                     <!-- ダミーのGoogleカレンダー埋め込み -->
                     <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded">
@@ -57,14 +57,39 @@
                     
                     <!-- キャンセルポリシー -->
                     <div class="mt-6">
-                        <h4 class="font-semibold mb-2">キャンセルポリシー</h4>
-                        <ul class="list-disc pl-5 space-y-1 text-sm text-gray-700">
-                            <li>ご予約日の14日前まで：無料</li>
-                            <li>ご予約日の13日前～7日前：宿泊料金の30%</li>
-                            <li>ご予約日の6日前～2日前：宿泊料金の50%</li>
-                            <li>ご予約日の前日：宿泊料金の80%</li>
-                            <li>ご予約日当日・不泊：宿泊料金の100%</li>
-                        </ul>
+                        <h4 class="font-semibold mb-3">キャンセルポリシー</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-gray-700">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-4 py-2 text-left border">キャンセル日</th>
+                                        <th class="px-4 py-2 text-center border">キャンセル料</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="px-4 py-2 border">ご予約日の10日前まで</td>
+                                        <td class="px-4 py-2 text-center border">無料</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 border">ご予約日の9日前～6日前</td>
+                                        <td class="px-4 py-2 text-center border">宿泊料金の30%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 border">ご予約日の5日前～2日前</td>
+                                        <td class="px-4 py-2 text-center border">宿泊料金の50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 border">ご予約日の前日</td>
+                                        <td class="px-4 py-2 text-center border">宿泊料金の80%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 border">ご予約日当日・不泊</td>
+                                        <td class="px-4 py-2 text-center border">宿泊料金の100%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <p class="mt-2 text-sm text-gray-600">※ 台風などの自然災害の場合は、状況に応じて対応いたします。</p>
                     </div>
                     
