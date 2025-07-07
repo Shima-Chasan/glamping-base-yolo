@@ -45,14 +45,9 @@
                         <p class="text-sm text-gray-600 mb-2">以下のカレンダーで空室状況をご確認いただけます。</p>
                         <p class="text-sm text-gray-600">予約は4ヶ月先まで受け付けております。</p>
                     </div>
-                    <!-- ダミーのGoogleカレンダー埋め込み -->
-                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded">
-                        <div class="flex items-center justify-center h-full">
-                            <p class="text-gray-500">
-                                <i class="far fa-calendar-alt text-4xl mb-2 block"></i>
-                                Googleカレンダーが表示されます
-                            </p>
-                        </div>
+                    <!-- Googleカレンダー埋め込み -->
+                    <div class="rounded overflow-hidden" style="height: 450px;">
+                        <iframe src="https://calendar.google.com/calendar/embed?src=9ef8e31868cad6132194f671d90bbf750f9708f1ca3b856bc018ff3daddf6f35%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
                     </div>
                     
                     <!-- キャンセルポリシー -->
@@ -62,29 +57,29 @@
                             <table class="w-full text-sm text-gray-700">
                                 <thead class="bg-gray-50">
                                     <tr>
-                                        <th class="px-4 py-2 text-left border">キャンセル日</th>
+                                        <th class="px-4 py-2 text-center border">キャンセル日</th>
                                         <th class="px-4 py-2 text-center border">キャンセル料</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="px-4 py-2 border">ご予約日の10日前まで</td>
+                                        <td class="px-4 py-2 text-center border">ご予約日の10日前まで</td>
                                         <td class="px-4 py-2 text-center border">無料</td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-2 border">ご予約日の9日前～6日前</td>
+                                        <td class="px-4 py-2 text-center border">ご予約日の9日前～6日前</td>
                                         <td class="px-4 py-2 text-center border">宿泊料金の30%</td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-2 border">ご予約日の5日前～2日前</td>
+                                        <td class="px-4 py-2 text-center border">ご予約日の5日前～2日前</td>
                                         <td class="px-4 py-2 text-center border">宿泊料金の50%</td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-2 border">ご予約日の前日</td>
+                                        <td class="px-4 py-2 text-center border">ご予約日の前日</td>
                                         <td class="px-4 py-2 text-center border">宿泊料金の80%</td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-2 border">ご予約日当日・不泊</td>
+                                        <td class="px-4 py-2 text-center border">ご予約日当日・不泊</td>
                                         <td class="px-4 py-2 text-center border">宿泊料金の100%</td>
                                     </tr>
                                 </tbody>
