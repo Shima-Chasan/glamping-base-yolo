@@ -79,6 +79,37 @@
         }
     </style>
     
+    <!-- 固定予約ボタンのスタイル -->
+    <style>
+        .fixed-reservation-button {
+            position: fixed;
+            bottom: 80px;
+            right: 30px;
+            z-index: 1000;
+            background-color: #FF9B6A; /* サンセットカラー */
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .fixed-reservation-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .fixed-reservation-button i {
+            margin-bottom: 5px;
+            font-size: 1.5rem;
+        }
+    </style>
+    
     <!-- カスタムCSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -103,6 +134,10 @@
                     <span>宿泊設備</span>
                     <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
                 </a>
+                <a href="#booking" class="relative px-1 group">
+                    <span>ご予約</span>
+                    <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+                </a>
                 <a href="#faq" class="relative px-1 group">
                     <span>FAQ</span>
                     <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
@@ -111,7 +146,9 @@
                     <span>アクセス</span>
                     <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
                 </a>
-                <a href="#booking" class="bg-turquoise text-white px-5 py-2.5 rounded-md ml-2 hover:scale-105 transition duration-300 text-base font-medium">予約する</a>
+                <a href="https://www.instagram.com/nakijin_glamping/" target="_blank" rel="noopener noreferrer" class="social-icon ml-2">
+                    <i class="fab fa-instagram"></i>
+                </a>
             </div>
             <div class="md:hidden">
                 <button id="menu-toggle" class="text-gray-500 hover:opacity-70 focus:outline-none transition duration-300">
@@ -137,6 +174,10 @@
                 <span>宿泊設備</span>
                 <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
             </a>
+            <a href="#booking" class="block px-3 py-2 rounded relative group">
+                <span>ご予約</span>
+                <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+            </a>
             <a href="#faq" class="block px-3 py-2 rounded relative group">
                 <span>FAQ</span>
                 <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
@@ -145,7 +186,14 @@
                 <span>アクセス</span>
                 <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
             </a>
-            <a href="#booking" class="block px-4 py-2.5 bg-turquoise text-white rounded hover:scale-105 transition duration-300 text-base font-medium">予約する</a>
+            <a href="https://www.instagram.com/nakijin_glamping/" target="_blank" rel="noopener noreferrer" class="block px-3 py-2 rounded">
+                <span class="flex items-center">
+                    <span class="social-icon mr-2 w-8 h-8 flex items-center justify-center">
+                        <i class="fab fa-instagram"></i>
+                    </span>
+                    Instagram
+                </span>
+            </a>
         </div>
     </div>
 </nav>
@@ -167,7 +215,7 @@
         <p class="text-xl md:text-3xl text-white mb-8 hero-text">
             最高の「今」を、沖縄の星空の下で。
         </p>
-        <a href="#booking" class="bg-sunset text-white rounded-full px-6 py-3 shadow-lg inline-block hover:scale-105 transition duration-300">
+        <a href="#booking" class="bg-turquoise text-white rounded-full px-6 py-3 shadow-lg inline-block hover:scale-105 transition duration-300">
             空室を確認する
         </a>
     </div>
@@ -300,55 +348,49 @@
             <p class="text-xl font-semibold text-gray-700">料金プラン</p>
         </div>
         
-        <!-- 宿泊プランとオプションプランを横並びに配置 -->
-        <div class="flex flex-col md:flex-row gap-8 mb-12">
-            <!-- 宿泊プラン -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden md:w-1/2">
-                <div class="bg-turquoise text-white p-4">
-                    <h3 class="text-xl font-semibold text-center">基本料金（オープン記念価格）</h3>
-                </div>
-                <div class="p-6">
-                    <table class="price-table w-full">
-                        <tbody>
-                            <tr>
-                                <td class="border-t px-4 py-3">オープン記念<br>1棟貸切</td>
-                                <td class="border-t px-4 py-3">¥45,000 / 泊</td>
-                                <td class="border-t px-4 py-3">6名以上からは<br>+¥5,000/人<br>（6歳未満無料）</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p class="mt-4 text-sm text-gray-600">サウナ付き・定員5名様</p>
-                </div>
-            </div>
-            
-            <!-- オプション -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden md:w-1/2">
-                <div class="bg-turquoise text-white p-4">
-                    <h3 class="text-xl font-semibold text-center">オプション</h3>
-                </div>
-                <div class="p-6">
-                    <ul class="space-y-4">
-                        <li>
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold">ガス BBQ グリル</span>
-                                <span>¥3,500 / 泊</span>
-                            </div>
-                            <p class="text-sm text-gray-600 mt-1">2泊目〜 ¥1,000 / 泊<br>※食材等はお客様にてご用意ください</p>
-                        </li>
-                        <li>
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold">プール利用</span>
-                                <span>無料</span>
-                            </div>
-                            <p class="text-sm text-gray-600 mt-1">9:00-18:00（要予約）</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
+        <!-- 料金表を一つのカードにまとめる -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-            <div class="p-4 bg-gray-50 text-sm text-gray-600">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <!-- 基本料金 -->
+                <div class="border-b md:border-b-0 md:border-r border-gray-200 flex flex-col">
+                    <div class="bg-turquoise text-white p-4">
+                        <h3 class="text-xl font-semibold text-center">基本料金（オープン記念価格）</h3>
+                    </div>
+                    <div class="flex-grow flex items-center justify-center py-10 px-8">
+                        <div class="text-center">
+                            <div class="text-xl font-semibold mb-3">1棟貸切・サウナ付き（定員5名）</div>
+                            <div class="text-2xl font-bold mb-4">¥45,000/泊</div>
+                            <p class="border-b border-wavy pb-1 inline-block">
+                                6名以上からは+¥5,000/人（6歳未満無料）
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- オプション -->
+                <div>
+                    <div class="bg-turquoise text-white p-4">
+                        <h3 class="text-xl font-semibold text-center">オプション</h3>
+                    </div>
+                    <div class="p-6 px-8">
+                        <div class="mb-4 pb-4 border-b border-gray-200">
+                            <div class="flex justify-between px-4 mb-2">
+                                <span class="font-semibold">ガス BBQ グリル</span>
+                                <span class="font-semibold">¥3,500 / 泊</span>
+                            </div>
+                            <p class="text-sm text-gray-600 pl-4">2泊目〜 ¥1,000 / 泊<br>※食材等はお客様にてご用意ください</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between px-4 mb-2">
+                                <span class="font-semibold">プール利用</span>
+                                <span class="font-semibold">無料</span>
+                            </div>
+                            <p class="text-sm text-gray-600 pl-4">9:00-18:00（要予約）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-gray-50 text-sm text-gray-600 border-t border-gray-200">
                 ※ 料金は税込み表示です。季節により変動する場合があります。
             </div>
         </div>
@@ -516,7 +558,7 @@
                     
                     <!-- 予約ボタン -->
                     <div class="mt-6 text-center">
-                        <a href="https://example.com/booking" target="_blank" class="bg-sunset text-white rounded-full px-6 py-3 shadow-lg inline-block hover:scale-105 transition duration-300">
+                        <a href="https://example.com/booking" target="_blank" class="bg-turquoise text-white rounded-full px-6 py-3 shadow-lg inline-block hover:scale-105 transition duration-300">
                             <i class="fas fa-calendar-check mr-2"></i>予約サイトへ
                         </a>
                     </div>
@@ -709,8 +751,8 @@
                                 <i class="fas fa-bus text-turquoise mr-2"></i>公共交通機関でお越しの場合
                             </h4>
                             <ul class="ml-6 space-y-1 text-gray-700">
-                                <li>那覇バスターミナルから高速バスで名護バスターミナルまで約2時間</li>
-                                <li>名護バスターミナルから路線バスで「今帰仁入口」下車、徒歩15分</li>
+                                <li>那覇バスターミナルから「やんばる急行バス」で今帰仁村役場まで約2時間40分</li>
+                                <li>今帰仁村役場から当施設まで車で約10分</li>
 
                             </ul>
                         </div>
@@ -750,8 +792,8 @@
         
         <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-700">
             <div class="mb-4 md:mb-0">
+                <p class="text-sm text-gray-400 mb-2"><a href="privacy-policy.html" class="hover:text-turquoise transition duration-300">プライバシーポリシー</a></p>
                 <p class="text-sm text-gray-400">&copy; 2025 glamping base YOLO. All rights reserved.</p>
-                <p class="text-sm text-gray-400 mt-2"><a href="#privacy-policy" class="hover:text-turquoise transition duration-300">プライバシーポリシー</a></p>
             </div>
             
             <div class="flex space-x-4">
@@ -764,5 +806,14 @@
     </div>
 </footer>
     <script src="js/main.js"></script>
+    
+    <!-- 固定予約ボタン -->
+    <a href="#booking" class="fixed-reservation-button">
+        <i class="fas fa-paper-plane"></i>
+        <div class="text-center">
+            <div>ご予約</div>
+            <div>お問い合わせ</div>
+        </div>
+    </a>
 </body>
 </html>
