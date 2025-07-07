@@ -44,7 +44,7 @@
 
         .fade {
             animation-name: fade;
-            animation-duration: 15s;
+            animation-duration: 16s;
             animation-iteration-count: infinite;
         }
 
@@ -53,16 +53,20 @@
         }
 
         .slide:nth-child(2) {
-            animation-delay: 5s;
+            animation-delay: 4s;
         }
 
         .slide:nth-child(3) {
-            animation-delay: 10s;
+            animation-delay: 8s;
+        }
+        
+        .slide:nth-child(4) {
+            animation-delay: 12s;
         }
 
         @keyframes fade {
-            0%, 30% { opacity: 1; }
-            33%, 97% { opacity: 0; }
+            0%, 22% { opacity: 1; }
+            25%, 97% { opacity: 0; }
             100% { opacity: 1; }
         }
         
@@ -84,11 +88,11 @@
         .fixed-reservation-button {
             position: fixed;
             bottom: 80px;
-            right: 30px;
+            right: 20px;
             z-index: 1000;
             background-color: #FF9B6A; /* サンセットカラー */
             color: #fff;
-            padding: 15px 20px;
+            padding: 12px 16px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             font-weight: 400;
@@ -97,6 +101,21 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+        }
+        
+        /* モバイル用に小さく調整 */
+        @media (max-width: 768px) {
+            .fixed-reservation-button {
+                padding: 8px 12px;
+                bottom: 60px;
+                right: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .fixed-reservation-button i {
+                font-size: 1.2rem;
+                margin-bottom: 3px;
+            }
         }
         
         .fixed-reservation-button:hover {
@@ -202,9 +221,10 @@
 <section id="hero" class="hero-section relative overflow-hidden">
     <!-- スライドショー用の画像コンテナ -->
     <div class="slideshow-container absolute inset-0 w-full h-full">
+        <div class="slide fade absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('images/dome-exterior.png');"></div>
         <div class="slide fade absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('images/sea1.jpeg');"></div>
         <div class="slide fade absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('images/sea2.jpeg');"></div>
-        <div class="slide fade absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('images/sea&amp;tree.jpeg');"></div>
+        <div class="slide fade absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('images/sea&tree.jpeg');"></div>
     </div>
     
     <!-- コンテンツ -->
@@ -415,60 +435,57 @@
             <p class="text-xl font-semibold text-gray-700">宿泊設備</p>
         </div>
         
-        <!-- 客室画像 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <div>
-                <img src="images/beds.png" alt="ベッド" class="rounded-lg shadow-lg w-full h-64 object-cover" loading="lazy">
-            </div>
-            <div>
-                <img src="images/dome-exterior.png" alt="ドーム外観" class="rounded-lg shadow-lg w-full h-64 object-cover" loading="lazy">
-            </div>
+        <!-- 客室画像 - ベッドのみ表示 -->
+        <div class="mb-8">
+            <img src="images/beds.png" alt="ベッド" class="rounded-lg shadow-lg w-full h-64 md:h-80 object-cover" loading="lazy">
         </div>
         
-        <!-- 施設詳細とアメニティ・備品を横並びに配置 -->
-        <div class="flex flex-col md:flex-row gap-8 mb-12">
-            <!-- 施設詳細 -->
-            <div class="bg-white rounded-lg shadow-lg p-6 md:w-1/2">
-                <h3 class="text-xl font-semibold mb-6">施設詳細</h3>
-                <ul class="divide-y divide-gray-200">
-                    <li class="py-4 flex items-center">
-                        <i class="fas fa-bed text-turquoise mr-3"></i>
-                        <span>セミダブル 2台</span>
-                    </li>
-                    <li class="py-4 flex items-center">
-                        <i class="fas fa-bed text-turquoise mr-3"></i>
-                        <span>二段ベッド 1台</span>
-                    </li>
-                    <li class="py-4 flex items-center">
-                        <i class="fas fa-couch text-turquoise mr-3"></i>
-                        <span>シングルソファベッド 2台</span>
-                    </li>
-                    <li class="py-4 flex items-center">
-                        <i class="fas fa-campground text-turquoise mr-3"></i>
-                        <span>赤ちゃん用テント 1張</span>
-                    </li>
-                </ul>
-                <p class="mt-6 text-sm text-gray-600">※ 最大8名様までご宿泊いただけます。</p>
-            </div>
-            
-            <!-- アメニティと備品 -->
-            <div class="bg-white rounded-lg shadow-lg p-6 md:w-1/2">
-                <h3 class="text-xl font-semibold mb-6">アメニティと備品</h3>
-                <ul class="list-disc pl-5 space-y-2">
-                    <li>ドライヤー</li>
-                    <li>ヘアアイロン</li>
-                    <li>サウナマット＆ハット</li>
-                    <li>プロジェクター</li>
-                    <li>コーヒーメーカー</li>
-                    <li>炊飯器</li>
-                    <li>電子レンジ</li>
-                    <li>冷蔵庫</li>
-                    <li>洗濯機</li>
-                    <li>ガス乾燥機</li>
-                    <li>IHクッキングヒータ</li>
-                    <li>Wi-Fi</li>
-                </ul>
-            </div>
+        <!-- 施設詳細 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-6">施設詳細</h3>
+            <ul class="divide-y divide-gray-200">
+                <li class="py-4 flex items-center">
+                    <i class="fas fa-bed text-turquoise mr-3"></i>
+                    <span>セミダブル 2台</span>
+                </li>
+                <li class="py-4 flex items-center">
+                    <i class="fas fa-bed text-turquoise mr-3"></i>
+                    <span>二段ベッド 1台</span>
+                </li>
+                <li class="py-4 flex items-center">
+                    <i class="fas fa-couch text-turquoise mr-3"></i>
+                    <span>シングルソファベッド 2台</span>
+                </li>
+                <li class="py-4 flex items-center">
+                    <i class="fas fa-campground text-turquoise mr-3"></i>
+                    <span>赤ちゃん用テント 1張</span>
+                </li>
+            </ul>
+            <p class="mt-6 text-sm text-gray-600">※ 最大8名様までご宿泊いただけます。</p>
+        </div>
+        
+        <!-- ドーム外観画像 -->
+        <div class="mb-8">
+            <img src="images/dome-exterior.png" alt="ドーム外観" class="rounded-lg shadow-lg w-full h-64 md:h-80 object-cover" loading="lazy">
+        </div>
+        
+        <!-- アメニティと備品 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-6">アメニティと備品</h3>
+            <ul class="list-disc pl-5 space-y-2">
+                <li>ドライヤー</li>
+                <li>ヘアアイロン</li>
+                <li>サウナマット＆ハット</li>
+                <li>プロジェクター</li>
+                <li>コーヒーメーカー</li>
+                <li>炊飯器</li>
+                <li>電子レンジ</li>
+                <li>冷蔵庫</li>
+                <li>洗濯機</li>
+                <li>ガス乾燥機</li>
+                <li>IHクッキングヒータ</li>
+                <li>Wi-Fi</li>
+            </ul>
         </div>
     </div>
 </section>
