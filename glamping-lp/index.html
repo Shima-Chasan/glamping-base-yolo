@@ -88,9 +88,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between items-center py-4">
             <div class="flex items-center">
-                <a href="index.html" class="hover:opacity-70 transition duration-300 ease-in-out">
-                    <img src="images/logo.png" alt="glamping base YOLO" class="h-16">
-                </a>
+                <a href="index.html" class="font-playfair text-2xl font-bold text-turquoise hover:opacity-70 transition duration-300 ease-in-out">glamping base YOLO</a>
             </div>
             <div class="hidden md:flex space-x-6 items-center">
                 <a href="#about" class="relative px-1 group">
@@ -220,7 +218,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="font-playfair text-3xl md:text-4xl font-bold tracking-wide uppercase mb-2">About Us</h2>
-            <p class="text-xl font-semibold text-gray-700">わたしたちについて</p>
+            <p class="text-xl font-semibold text-gray-700">当施設について</p>
         </div>
         
         <div class="flex flex-col md:flex-row gap-8 mb-16">
@@ -256,7 +254,7 @@
                 <div class="h-48 overflow-hidden">
                     <img src="images/beds.png" alt="宿泊施設" class="w-full h-full object-cover" loading="lazy">
                 </div>
-                <div class="p-6 text-center">
+                <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">宿泊</h3>
                     <p class="text-gray-600">ファンシーで快適なテントでの宿泊体験</p>
                 </div>
@@ -267,7 +265,7 @@
                 <div class="h-48 overflow-hidden">
                     <img src="images/bbq.jpeg" alt="BBQ" class="w-full h-full object-cover" loading="lazy">
                 </div>
-                <div class="p-6 text-center">
+                <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">BBQ</h3>
                     <p class="text-gray-600">星空の下で楽しむバーベキュー</p>
                 </div>
@@ -278,7 +276,7 @@
                 <div class="h-48 overflow-hidden">
                     <img src="images/pool.jpeg" alt="プール" class="w-full h-full object-cover" loading="lazy">
                 </div>
-                <div class="p-6 text-center">
+                <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">プール</h3>
                     <p class="text-gray-600">南国気分を満喫できるプール</p>
                 </div>
@@ -289,7 +287,7 @@
                 <div class="h-48 overflow-hidden">
                     <img src="images/sauna.jpeg" alt="サウナ" class="w-full h-full object-cover" loading="lazy">
                 </div>
-                <div class="p-6 text-center">
+                <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">サウナ</h3>
                     <p class="text-gray-600">ととのう極上のサウナ体験</p>
                 </div>
@@ -297,42 +295,59 @@
         </div>
         
         <!-- 料金表 -->
+        <div class="text-center mb-12 mt-16">
+            <h2 class="font-playfair text-3xl md:text-4xl font-bold tracking-wide uppercase mb-2">Price</h2>
+            <p class="text-xl font-semibold text-gray-700">料金プラン</p>
+        </div>
+        
+        <!-- 宿泊プランとオプションプランを横並びに配置 -->
+        <div class="flex flex-col md:flex-row gap-8 mb-12">
+            <!-- 宿泊プラン -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden md:w-1/2">
+                <div class="bg-turquoise text-white p-4">
+                    <h3 class="text-xl font-semibold text-center">基本料金（オープン記念価格）</h3>
+                </div>
+                <div class="p-6">
+                    <table class="price-table w-full">
+                        <tbody>
+                            <tr>
+                                <td class="border-t px-4 py-3">オープン記念<br>1棟貸切</td>
+                                <td class="border-t px-4 py-3">¥45,000 / 泊</td>
+                                <td class="border-t px-4 py-3">6名以上からは<br>+¥5,000/人<br>（6歳未満無料）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="mt-4 text-sm text-gray-600">サウナ付き・定員5名様</p>
+                </div>
+            </div>
+            
+            <!-- オプション -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden md:w-1/2">
+                <div class="bg-turquoise text-white p-4">
+                    <h3 class="text-xl font-semibold text-center">オプション</h3>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-4">
+                        <li>
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold">ガス BBQ グリル</span>
+                                <span>¥3,500 / 泊</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">2泊目〜 ¥1,000 / 泊<br>※食材等はお客様にてご用意ください</p>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold">プール利用</span>
+                                <span>無料</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">9:00-18:00（要予約）</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
         <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-            <div class="bg-turquoise text-white p-4">
-                <h3 class="text-xl font-semibold text-center">料金プラン</h3>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="price-table w-full">
-                    <thead>
-                        <tr class="bg-gray-50">
-                            <th class="px-4 py-3 text-left">プラン</th>
-                            <th class="px-4 py-3 text-left">内容</th>
-                            <th class="px-4 py-3 text-left">料金</th>
-                            <th class="px-4 py-3 text-left">備考</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border-t px-4 py-3">オープン記念 1棟貸切</td>
-                            <td class="border-t px-4 py-3">サウナ付き・定員5名</td>
-                            <td class="border-t px-4 py-3">¥45,000 / 泊</td>
-                            <td class="border-t px-4 py-3">6名以上からは +¥5,000/人（6歳未満無料）</td>
-                        </tr>
-                        <tr>
-                            <td class="border-t px-4 py-3">ガス BBQ グリル</td>
-                            <td class="border-t px-4 py-3">一式レンタル</td>
-                            <td class="border-t px-4 py-3">¥3,500 / 泊</td>
-                            <td class="border-t px-4 py-3">2泊目〜 ¥1,000 / 泊</td>
-                        </tr>
-                        <tr>
-                            <td class="border-t px-4 py-3">プール利用</td>
-                            <td class="border-t px-4 py-3">宿泊者専用</td>
-                            <td class="border-t px-4 py-3">無料</td>
-                            <td class="border-t px-4 py-3">9:00-18:00（要予約）</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
             <div class="p-4 bg-gray-50 text-sm text-gray-600">
                 ※ 料金は税込み表示です。季節により変動する場合があります。
             </div>
@@ -600,7 +615,7 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
-                            <span>花火や打ち上げ花火の使用</span>
+                            <span>パーティーやイベントでの使用</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-circle text-xs mt-1.5 mr-2 text-gray-400"></i>
