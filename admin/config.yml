@@ -1,0 +1,57 @@
+backend:
+  name: github
+  repo: Shima-Chasan/glamping-base-yolo
+  branch: main # GitHubのブランチ名
+  auth_scope: repo # 必要な権限スコープ
+
+# Netlify Identityを使用して認証
+site_id: your-netlify-site-id # Netlifyのサイトid（後で実際のIDに置き換え）
+
+# 公開パスの設定
+publish_mode: editorial_workflow # 編集ワークフローを有効化（プルリクエスト方式）
+media_folder: "images/uploads" # メディアファイルのアップロード先
+public_folder: "/images/uploads" # 公開時のパス
+
+# 日本語対応
+locale: 'ja'
+
+# コンテンツコレクション（編集可能なコンテンツタイプ）
+collections:
+  - name: "pages"
+    label: "ページ"
+    files:
+      - file: "index.html"
+        label: "トップページ"
+        name: "home"
+        editor:
+          preview: false
+        fields:
+          - {label: "ヒーローセクションタイトル", name: "hero_title", widget: "string"}
+          - {label: "ヒーローセクションサブタイトル", name: "hero_subtitle", widget: "string"}
+          - {label: "アバウトセクションタイトル", name: "about_title", widget: "string"}
+          - {label: "アバウトセクション本文", name: "about_content", widget: "markdown"}
+          - {label: "アコモデーションセクションタイトル", name: "accommodation_title", widget: "string"}
+          - {label: "アコモデーションセクション説明", name: "accommodation_description", widget: "string"}
+          
+  - name: "amenities"
+    label: "アメニティと備品"
+    folder: "_data"
+    create: false
+    slug: "{{slug}}"
+    fields:
+      - {label: "アメニティ名", name: "title", widget: "string"}
+      - {label: "アメニティリスト", name: "items", widget: "list"}
+      
+  - name: "cancellation"
+    label: "キャンセルポリシー"
+    folder: "_data"
+    create: false
+    slug: "{{slug}}"
+    fields:
+      - {label: "タイトル", name: "title", widget: "string"}
+      - label: "キャンセルポリシー"
+        name: "policies"
+        widget: "list"
+        fields:
+          - {label: "キャンセル日", name: "date", widget: "string"}
+          - {label: "キャンセル料", name: "fee", widget: "string"}
