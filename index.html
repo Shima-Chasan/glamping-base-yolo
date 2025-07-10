@@ -138,7 +138,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between items-center py-4">
             <div class="flex items-center">
-                <a href="index.html" class="font-playfair text-2xl font-bold text-turquoise hover:opacity-70 transition duration-300 ease-in-out">glamping base YOLO</a>
+                <a href="index.html" class="font-playfair text-2xl md:text-2xl font-bold text-turquoise hover:opacity-70 transition duration-300 ease-in-out"><span class="md:inline text-xl md:text-2xl">glamping base YOLO</span></a>
             </div>
             <div class="hidden md:flex space-x-6 items-center">
                 <a href="#about" class="relative px-1 group">
@@ -230,7 +230,8 @@
     <!-- コンテンツ -->
     <div class="hero-content relative z-10 max-w-7xl mx-auto px-4 text-center py-32">
         <h1 class="font-playfair text-4xl md:text-6xl font-bold text-white tracking-wide uppercase mb-4 hero-text">
-            You Only Live Once
+            <span class="md:hidden">You Only<br>Live Once</span>
+            <span class="hidden md:inline">You Only Live Once</span>
         </h1>
         <p class="text-xl md:text-3xl text-white mb-8 hero-text">
             最高の「今」を、沖縄の星空の下で。
@@ -435,63 +436,72 @@
             <p class="text-xl font-semibold text-gray-700">宿泊設備</p>
         </div>
         
-        <!-- 客室画像 -->
-        <div class="flex justify-center mb-12">
-            <div class="max-w-2xl">
-                <img src="images/beds.png" alt="ベッド" class="rounded-lg shadow-lg w-full h-64 object-cover" loading="lazy">
+        <!-- デスクトップ表示用のレイアウト -->
+        <div class="hidden md:grid grid-cols-2 gap-8 mb-12">
+            <!-- 左側カラム -->
+            <div class="flex flex-col space-y-8">
+                <!-- 左上：客室画像 -->
+                <div>
+                    <img src="images/beds.png" alt="ベッド" class="rounded-lg shadow-lg w-full h-64 object-cover" loading="lazy">
+                </div>
+                
+                <!-- 左下：施設詳細 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-6">施設詳細</h3>
+                    <ul class="divide-y divide-gray-200">
+                        <li class="py-4 flex items-center">
+                            <i class="fas fa-bed text-turquoise mr-3"></i>
+                            <span>セミダブル 2台</span>
+                        </li>
+                        <li class="py-4 flex items-center">
+                            <i class="fas fa-bed text-turquoise mr-3"></i>
+                            <span>二段ベッド 1台</span>
+                        </li>
+                        <li class="py-4 flex items-center">
+                            <i class="fas fa-couch text-turquoise mr-3"></i>
+                            <span>シングルソファベッド 2台</span>
+                        </li>
+                        <li class="py-4 flex items-center">
+                            <i class="fas fa-campground text-turquoise mr-3"></i>
+                            <span>赤ちゃん用テント 1張</span>
+                        </li>
+                    </ul>
+                    <p class="mt-6 text-sm text-gray-600">※ 最大8名様までご宿泊いただけます。</p>
+                </div>
+            </div>
+            
+            <!-- 右側：アメニティと備品 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 h-full">
+                <h3 class="text-xl font-semibold mb-6">アメニティと備品</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>歯ブラシ</li>
+                    <li>くし</li>
+                    <li>ボディータオル</li>
+                    <li>ドライヤー</li>
+                    <li>ヘアアイロン</li>
+                    <li>サウナマット&amp;ハット</li>
+                    <li>プロジェクター</li>
+                    <li>コーヒーメーカー</li>
+                    <li>炊飯器</li>
+                    <li>電子レンジ</li>
+                    <li>冷蔵庫</li>
+                    <li>洗濯機</li>
+                    <li>ガス乾燥機</li>
+                    <li>IHクッキングヒータ</li>
+                    <li>Wi-Fi</li>
+                </ul>
             </div>
         </div>
         
-        <!-- モバイル表示用の施設詳細 -->
-        <div class="md:hidden bg-white rounded-lg shadow-lg p-6 mb-8">
-            <h3 class="text-xl font-semibold mb-6">施設詳細</h3>
-            <ul class="divide-y divide-gray-200">
-                <li class="py-4 flex items-center">
-                    <i class="fas fa-bed text-turquoise mr-3"></i>
-                    <span>セミダブル 2台</span>
-                </li>
-                <li class="py-4 flex items-center">
-                    <i class="fas fa-bed text-turquoise mr-3"></i>
-                    <span>二段ベッド 1台</span>
-                </li>
-                <li class="py-4 flex items-center">
-                    <i class="fas fa-couch text-turquoise mr-3"></i>
-                    <span>シングルソファベッド 2台</span>
-                </li>
-                <li class="py-4 flex items-center">
-                    <i class="fas fa-campground text-turquoise mr-3"></i>
-                    <span>赤ちゃん用テント 1張</span>
-                </li>
-            </ul>
-            <p class="mt-6 text-sm text-gray-600">※ 最大8名様までご宿泊いただけます。</p>
-        </div>
-        
-        <!-- モバイル表示用のアメニティと備品 -->
-        <div class="md:hidden bg-white rounded-lg shadow-lg p-6 mb-8">
-            <h3 class="text-xl font-semibold mb-6">アメニティと備品</h3>
-            <ul class="list-disc pl-5 space-y-2">
-                <li>歯ブラシ</li>
-                <li>くし</li>
-                <li>ボディータオル</li>
-                <li>ドライヤー</li>
-                <li>ヘアアイロン</li>
-                <li>サウナマット＆ハット</li>
-                <li>プロジェクター</li>
-                <li>コーヒーメーカー</li>
-                <li>炊飯器</li>
-                <li>電子レンジ</li>
-                <li>冷蔵庫</li>
-                <li>洗濯機</li>
-                <li>ガス乾燥機</li>
-                <li>IHクッキングヒータ</li>
-                <li>Wi-Fi</li>
-            </ul>
-        </div>
-        
-        <!-- デスクトップ表示用の施設詳細とアメニティ・備品を横並びに配置 -->
-        <div class="hidden md:flex flex-col md:flex-row gap-8 mb-12">
+        <!-- モバイル表示用のレイアウト -->
+        <div class="md:hidden mb-8">
+            <!-- 客室画像 -->
+            <div class="mb-8">
+                <img src="images/beds.png" alt="ベッド" class="rounded-lg shadow-lg w-full h-64 object-cover" loading="lazy">
+            </div>
+            
             <!-- 施設詳細 -->
-            <div class="bg-white rounded-lg shadow-lg p-6 md:w-1/2">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
                 <h3 class="text-xl font-semibold mb-6">施設詳細</h3>
                 <ul class="divide-y divide-gray-200">
                     <li class="py-4 flex items-center">
@@ -515,7 +525,7 @@
             </div>
             
             <!-- アメニティと備品 -->
-            <div class="bg-white rounded-lg shadow-lg p-6 md:w-1/2">
+            <div class="bg-white rounded-lg shadow-lg p-6">
                 <h3 class="text-xl font-semibold mb-6">アメニティと備品</h3>
                 <ul class="list-disc pl-5 space-y-2">
                     <li>歯ブラシ</li>
@@ -523,7 +533,7 @@
                     <li>ボディータオル</li>
                     <li>ドライヤー</li>
                     <li>ヘアアイロン</li>
-                    <li>サウナマット&amp;ハット</li>
+                    <li>サウナマット＆ハット</li>
                     <li>プロジェクター</li>
                     <li>コーヒーメーカー</li>
                     <li>炊飯器</li>
@@ -603,23 +613,23 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="px-4 py-2 text-center border">ご予約日の10日前まで</td>
+                                        <td class="px-4 py-2 md:text-center text-left border">ご予約日の10日前まで</td>
                                         <td class="px-4 py-2 text-center border">無料</td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-2 text-center border">ご予約日の9日前～6日前</td>
+                                        <td class="px-4 py-2 md:text-center text-left border">ご予約日の9日前～6日前</td>
                                         <td class="px-4 py-2 text-center border">宿泊料金の30%</td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-2 text-center border">ご予約日の5日前～2日前</td>
+                                        <td class="px-4 py-2 md:text-center text-left border">ご予約日の5日前～2日前</td>
                                         <td class="px-4 py-2 text-center border">宿泊料金の50%</td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-2 text-center border">ご予約日の前日</td>
+                                        <td class="px-4 py-2 md:text-center text-left border">ご予約日の前日</td>
                                         <td class="px-4 py-2 text-center border">宿泊料金の80%</td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-2 text-center border">ご予約日当日・不泊</td>
+                                        <td class="px-4 py-2 md:text-center text-left border">ご予約日当日・不泊</td>
                                         <td class="px-4 py-2 text-center border">宿泊料金の100%</td>
                                     </tr>
                                 </tbody>
