@@ -27,7 +27,7 @@ collections:
     fields:
       - {label: "タイトル", name: "title", widget: "string"}
       - {label: "公開日", name: "date", widget: "datetime", format: "YYYY.MM.DD", date_format: "YYYY.MM.DD", time_format: false}
-      - {label: "内容", name: "content", widget: "string"}
+      - {label: "内容", name: "content", widget: "markdown", buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"], editor_components: [], modes: ["rich_text"], minimal: true}
       - {label: "公開状態", name: "published", widget: "boolean", default: true}
       
   - name: "site_settings"
