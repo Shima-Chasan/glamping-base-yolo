@@ -15,10 +15,26 @@ async function loadNewsData() {
         // キャッシュバスト用のランダムクエリパラメータを生成
         const cacheBuster = `?_=${new Date().getTime()}`;
         
-        // CMSで新規作成されたファイルのみを含める
+        // 既存のお知らせ記事を読み込む
         const newsFiles = [
-            '/_data/news/test.yml'  // テスト記事
+            '/_data/news/20250514-line.yml',
+            '/_data/news/20250513-crowdfunding.yml',
+            '/_data/news/20250501-holiday.yml'
         ];
+        
+        // CMSで作成された可能性のあるファイルパスを探索
+        const possiblePaths = [
+            '/_data/news/test.yml',
+            '/admin/collections/news/entries/test.yml',
+            '/_data/test.yml'
+        ];
+        
+        // 可能性のあるパスを追加
+        possiblePaths.forEach(path => {
+            if (!newsFiles.includes(path)) {
+                newsFiles.push(path);
+            }
+        });
         
         // 各ファイルのデータを取得
         const newsPromises = newsFiles.map(async filePath => {
@@ -45,8 +61,16 @@ async function loadNewsData() {
                 return new Date(dateB) - new Date(dateA);
             });
         
-        // 公開状態がオンのもののみ表示
-        newsItems = newsItems.filter(item => item.published !== false);
+        // 公開状態がオンで、日付とタイトルがあるもののみ表示
+        newsItems = newsItems.filter(item => {
+            // 非公開の記事を除外
+            if (item.published === false) return false;
+            
+            // 日付またはタイトルがない記事を除外
+            if (!item.date || !item.title) return false;
+            
+            return true;
+        });
         
         // HTMLを生成
         if (newsItems.length > 0) {
