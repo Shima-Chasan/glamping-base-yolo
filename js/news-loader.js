@@ -15,26 +15,17 @@ async function loadNewsData() {
         // キャッシュバスト用のランダムクエリパラメータを生成
         const cacheBuster = `?_=${new Date().getTime()}`;
         
-        // 既存のお知らせ記事を読み込む
+        // CMSで作成された記事のパスを探索
         const newsFiles = [
-            '/_data/news/20250514-line.yml',
-            '/_data/news/20250513-crowdfunding.yml',
-            '/_data/news/20250501-holiday.yml'
-        ];
-        
-        // CMSで作成された可能性のあるファイルパスを探索
-        const possiblePaths = [
             '/_data/news/test.yml',
             '/admin/collections/news/entries/test.yml',
             '/_data/test.yml'
         ];
         
-        // 可能性のあるパスを追加
-        possiblePaths.forEach(path => {
-            if (!newsFiles.includes(path)) {
-                newsFiles.push(path);
-            }
-        });
+        // 既存の3つの記事は含まない
+        // '/_data/news/20250514-line.yml',
+        // '/_data/news/20250513-crowdfunding.yml',
+        // '/_data/news/20250501-holiday.yml'
         
         // 各ファイルのデータを取得
         const newsPromises = newsFiles.map(async filePath => {
