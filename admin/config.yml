@@ -45,10 +45,24 @@ collections:
         name: "pricing"
         fields:
           - {label: "セクションタイトル", name: "title", widget: "string"}
-          - label: "料金プラン"
-            name: "plans"
-            widget: "list"
+          - label: "基本料金"
+            name: "basic_plan"
+            widget: "object"
             fields:
+              - {label: "タイトル", name: "title", widget: "string"}
               - {label: "プラン名", name: "name", widget: "string"}
               - {label: "料金", name: "price", widget: "string"}
-              - {label: "説明", name: "description", widget: "string"}
+              - {label: "詳細情報", name: "notes", widget: "list"}
+          - label: "オプション"
+            name: "options"
+            widget: "object"
+            fields:
+              - {label: "タイトル", name: "title", widget: "string"}
+              - label: "オプション項目"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "項目名", name: "name", widget: "string"}
+                  - {label: "料金", name: "price", widget: "string"}
+                  - {label: "詳細", name: "notes", widget: "string"}
+          - {label: "注釈", name: "footnote", widget: "string"}
