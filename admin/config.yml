@@ -39,18 +39,6 @@ collections:
         fields:
           - {label: "セクションタイトル", name: "title", widget: "string"}
           - {label: "アメニティリスト", name: "items", widget: "list"}
-      
-      - file: "_data/cancellation.yml"
-        label: "キャンセルポリシー"
-        name: "cancellation"
-        fields:
-          - {label: "タイトル", name: "title", widget: "string"}
-          - label: "キャンセルポリシー"
-            name: "policies"
-            widget: "list"
-            fields:
-              - {label: "キャンセル日", name: "date", widget: "string"}
-              - {label: "キャンセル料", name: "fee", widget: "string"}
               
       - file: "_data/pricing.yml"
         label: "料金プラン"
