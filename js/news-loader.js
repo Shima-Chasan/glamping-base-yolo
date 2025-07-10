@@ -12,8 +12,12 @@ async function loadNewsData() {
         const newsContainer = document.getElementById('news-container');
         if (!newsContainer) return;
         
-        // データファイルのパスを取得
+        // キャッシュバスト用のランダムクエリパラメータを生成
+        const cacheBuster = `?_=${new Date().getTime()}`;
+        
+        // CMSで新規作成されたファイルも含める
         const newsFiles = [
+            '/_data/news/test.yml',  // テスト記事
             '/_data/news/20250514-line.yml',
             '/_data/news/20250513-crowdfunding.yml',
             '/_data/news/20250501-holiday.yml'
@@ -22,7 +26,7 @@ async function loadNewsData() {
         // 各ファイルのデータを取得
         const newsPromises = newsFiles.map(async filePath => {
             try {
-                const fileResponse = await fetch(filePath);
+                const fileResponse = await fetch(`${filePath}${cacheBuster}`);
                 if (!fileResponse.ok) return null;
                 const yamlText = await fileResponse.text();
                 return parseYaml(yamlText, filePath);
@@ -39,8 +43,8 @@ async function loadNewsData() {
         newsItems = newsItems
             .filter(item => item !== null)
             .sort((a, b) => {
-                const dateA = a.date.split('.').join('-');
-                const dateB = b.date.split('.').join('-');
+                const dateA = a.date ? a.date.split('.').join('-') : '1900-01-01';
+                const dateB = b.date ? b.date.split('.').join('-') : '1900-01-01';
                 return new Date(dateB) - new Date(dateA);
             });
         
@@ -55,10 +59,10 @@ async function loadNewsData() {
                 newsElement.className = 'border-b border-gray-200 pb-6';
                 newsElement.innerHTML = `
                     <div class="flex items-center mb-2">
-                        <span class="text-turquoise font-semibold mr-4">${item.date}</span>
-                        <h3 class="text-xl font-semibold">${item.title}</h3>
+                        <span class="text-turquoise font-semibold mr-4">${item.date || '日付なし'}</span>
+                        <h3 class="text-xl font-semibold">${item.title || 'タイトルなし'}</h3>
                     </div>
-                    <div class="text-gray-600 news-content">${item.content}</div>
+                    <div class="text-gray-600 news-content">${item.content || ''}</div>
                 `;
                 newsContainer.appendChild(newsElement);
             });
