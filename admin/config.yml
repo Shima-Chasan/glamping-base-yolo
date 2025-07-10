@@ -1,3 +1,4 @@
+# バックエンド設定
 backend:
   name: git-gateway
   branch: main # GitHubのブランチ名
@@ -18,8 +19,8 @@ locale: 'ja'
 
 # コンテンツコレクション（編集可能なコンテンツタイプ）
 collections:
-  - name: "pages"
-    label: "ページ"
+  - name: "site_content"
+    label: "サイトコンテンツ"
     files:
       - file: "index.html"
         label: "トップページ"
@@ -34,25 +35,24 @@ collections:
           - {label: "アコモデーションセクションタイトル", name: "accommodation_title", widget: "string"}
           - {label: "アコモデーションセクション説明", name: "accommodation_description", widget: "string"}
           
-  - name: "amenities"
-    label: "アメニティと備品"
-    folder: "_data"
-    create: false
-    slug: "{{slug}}"
-    fields:
-      - {label: "アメニティ名", name: "title", widget: "string"}
-      - {label: "アメニティリスト", name: "items", widget: "list"}
-      
-  - name: "cancellation"
-    label: "キャンセルポリシー"
-    folder: "_data"
-    create: false
-    slug: "{{slug}}"
-    fields:
-      - {label: "タイトル", name: "title", widget: "string"}
-      - label: "キャンセルポリシー"
-        name: "policies"
-        widget: "list"
+  - name: "site_settings"
+    label: "サイト設定"
+    files:
+      - file: "_data/amenities.yml"
+        label: "アメニティと備品"
+        name: "amenities"
         fields:
-          - {label: "キャンセル日", name: "date", widget: "string"}
-          - {label: "キャンセル料", name: "fee", widget: "string"}
+          - {label: "アメニティ名", name: "title", widget: "string"}
+          - {label: "アメニティリスト", name: "items", widget: "list"}
+      
+      - file: "_data/cancellation.yml"
+        label: "キャンセルポリシー"
+        name: "cancellation"
+        fields:
+          - {label: "タイトル", name: "title", widget: "string"}
+          - label: "キャンセルポリシー"
+            name: "policies"
+            widget: "list"
+            fields:
+              - {label: "キャンセル日", name: "date", widget: "string"}
+              - {label: "キャンセル料", name: "fee", widget: "string"}
