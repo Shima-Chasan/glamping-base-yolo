@@ -19,22 +19,17 @@ locale: 'ja'
 
 # コンテンツコレクション（編集可能なコンテンツタイプ）
 collections:
-  - name: "site_content"
-    label: "サイトコンテンツ"
-    files:
-      - file: "index.html"
-        label: "トップページ"
-        name: "home"
-        editor:
-          preview: false
-        fields:
-          - {label: "ヒーローセクションタイトル", name: "hero_title", widget: "string"}
-          - {label: "ヒーローセクションサブタイトル", name: "hero_subtitle", widget: "string"}
-          - {label: "アバウトセクションタイトル", name: "about_title", widget: "string"}
-          - {label: "アバウトセクション本文", name: "about_content", widget: "markdown"}
-          - {label: "アコモデーションセクションタイトル", name: "accommodation_title", widget: "string"}
-          - {label: "アコモデーションセクション説明", name: "accommodation_description", widget: "string"}
-          
+  - name: "news"
+    label: "お知らせ"
+    folder: "_data/news"
+    create: true
+    slug: "{{year}}{{month}}{{day}}-{{slug}}"
+    fields:
+      - {label: "タイトル", name: "title", widget: "string"}
+      - {label: "公開日", name: "date", widget: "datetime", format: "YYYY.MM.DD", date_format: "YYYY.MM.DD", time_format: false}
+      - {label: "内容", name: "content", widget: "string"}
+      - {label: "公開状態", name: "published", widget: "boolean", default: true}
+      
   - name: "site_settings"
     label: "サイト設定"
     files:
@@ -42,7 +37,7 @@ collections:
         label: "アメニティと備品"
         name: "amenities"
         fields:
-          - {label: "アメニティ名", name: "title", widget: "string"}
+          - {label: "セクションタイトル", name: "title", widget: "string"}
           - {label: "アメニティリスト", name: "items", widget: "list"}
       
       - file: "_data/cancellation.yml"
@@ -56,3 +51,16 @@ collections:
             fields:
               - {label: "キャンセル日", name: "date", widget: "string"}
               - {label: "キャンセル料", name: "fee", widget: "string"}
+              
+      - file: "_data/pricing.yml"
+        label: "料金プラン"
+        name: "pricing"
+        fields:
+          - {label: "セクションタイトル", name: "title", widget: "string"}
+          - label: "料金プラン"
+            name: "plans"
+            widget: "list"
+            fields:
+              - {label: "プラン名", name: "name", widget: "string"}
+              - {label: "料金", name: "price", widget: "string"}
+              - {label: "説明", name: "description", widget: "string"}

@@ -1,0 +1,11 @@
+title: 料金プラン
+plans:
+  - name: スタンダードプラン
+    price: ¥35,000〜/泊
+    description: 2名様利用時の1名様あたりの料金です。
+  - name: ファミリープラン
+    price: ¥45,000〜/泊
+    description: 4名様利用時の料金です。お子様の添い寝は無料です。
+  - name: グループプラン
+    price: ¥60,000〜/泊
+    description: 6〜8名様利用時の料金です。BBQセット付きです。
