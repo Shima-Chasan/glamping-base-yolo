@@ -10,7 +10,7 @@ backend:
     deleteMedia: '画像削除: "{{path}}"'
 
 # 公開パスの設定
-publish_mode: editorial_workflow # 編集ワークフローを有効化（プルリクエスト方式）
+# publish_mode: editorial_workflow # 編集ワークフローを無効化
 media_folder: "images/uploads" # メディアファイルのアップロード先
 public_folder: "/images/uploads" # 公開時のパス
 

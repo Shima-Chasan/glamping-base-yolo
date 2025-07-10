@@ -21,8 +21,19 @@
     <script>
       // CMSの初期化
       window.addEventListener('load', function() {
-        // 自動初期化に変更
-        // config.ymlから設定を読み込む
+        // Netlify Identity Widgetの初期化
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on("init", user => {
+            if (!user) {
+              window.netlifyIdentity.on("login", () => {
+                document.location.href = "/admin/";
+              });
+            }
+          });
+        }
+
+        // Decap CMSの手動初期化
+        CMS.init();
       });
     </script>
   </body>
