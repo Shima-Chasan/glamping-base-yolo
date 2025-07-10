@@ -1,11 +1,12 @@
 backend:
-  name: github
-  repo: Shima-Chasan/glamping-base-yolo
+  name: git-gateway
   branch: main # GitHubのブランチ名
-  auth_scope: repo # 必要な権限スコープ
-
-# Netlify Identityを使用して認証
-site_id: your-netlify-site-id # Netlifyのサイトid（後で実際のIDに置き換え）
+  commit_messages:
+    create: '新規作成: {{collection}} "{{slug}}"'
+    update: '更新: {{collection}} "{{slug}}"'
+    delete: '削除: {{collection}} "{{slug}}"'
+    uploadMedia: '画像アップロード: "{{path}}"'
+    deleteMedia: '画像削除: "{{path}}"'
 
 # 公開パスの設定
 publish_mode: editorial_workflow # 編集ワークフローを有効化（プルリクエスト方式）
