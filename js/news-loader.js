@@ -15,12 +15,9 @@ async function loadNewsData() {
         // キャッシュバスト用のランダムクエリパラメータを生成
         const cacheBuster = `?_=${new Date().getTime()}`;
         
-        // CMSで新規作成されたファイルも含める
+        // CMSで新規作成されたファイルのみを含める
         const newsFiles = [
-            '/_data/news/test.yml',  // テスト記事
-            '/_data/news/20250514-line.yml',
-            '/_data/news/20250513-crowdfunding.yml',
-            '/_data/news/20250501-holiday.yml'
+            '/_data/news/test.yml'  // テスト記事
         ];
         
         // 各ファイルのデータを取得
