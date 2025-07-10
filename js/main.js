@@ -2,6 +2,8 @@
 
 // DOMが読み込まれたら実行
 document.addEventListener('DOMContentLoaded', function() {
+    // CMSのお知らせデータを読み込む
+    loadNewsData();
     // モバイルメニューの切り替え
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
