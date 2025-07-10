@@ -2,15 +2,6 @@
 backend:
   name: git-gateway
   branch: main # GitHubのブランチ名
-  commit_messages:
-    create: '新規作成: {{collection}} "{{slug}}"'
-    update: '更新: {{collection}} "{{slug}}"'
-    delete: '削除: {{collection}} "{{slug}}"'
-    uploadMedia: '画像アップロード: "{{path}}"'
-    deleteMedia: '画像削除: "{{path}}"'
-
-# 公開パスの設定
-# publish_mode: editorial_workflow # 編集ワークフローを無効化
 media_folder: "images/uploads" # メディアファイルのアップロード先
 public_folder: "/images/uploads" # 公開時のパス
 
@@ -27,7 +18,7 @@ collections:
     fields:
       - {label: "タイトル", name: "title", widget: "string"}
       - {label: "公開日", name: "date", widget: "datetime", format: "YYYY.MM.DD", date_format: "YYYY.MM.DD", time_format: false}
-      - {label: "内容", name: "content", widget: "markdown", buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"], editor_components: [], modes: ["rich_text"], minimal: true}
+      - {label: "内容", name: "content", widget: "markdown"}
       - {label: "公開状態", name: "published", widget: "boolean", default: true}
       
   - name: "site_settings"
