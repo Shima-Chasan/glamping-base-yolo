@@ -15,17 +15,36 @@ async function loadNewsData() {
         // キャッシュバスト用のランダムクエリパラメータを生成
         const cacheBuster = `?_=${new Date().getTime()}`;
         
-        // CMSで作成された記事のパスを探索
-        const newsFiles = [
-            '/_data/news/test.yml',
-            '/admin/collections/news/entries/test.yml',
-            '/_data/test.yml'
-        ];
+        // ニュースディレクトリの全ファイルを取得する関数
+        async function getNewsFiles() {
+            try {
+                // まずはディレクトリのリストを取得する試み
+                const response = await fetch(`/_data/news/${cacheBuster}`);
+                const text = await response.text();
+                
+                // HTMLからファイル名を抽出
+                const fileRegex = /href="([^"]+\.(md|yml))"/g;
+                const files = [];
+                let match;
+                
+                while ((match = fileRegex.exec(text)) !== null) {
+                    if (match[1] !== 'index.json') {
+                        files.push(`/_data/news/${match[1]}`);
+                    }
+                }
+                
+                return files;
+            } catch (e) {
+                console.error('Error getting news files:', e);
+                // フォールバック: 既知のファイルを返す
+                return [
+                    '/_data/news/20250710-テスト.md'
+                ];
+            }
+        }
         
-        // 既存の3つの記事は含まない
-        // '/_data/news/20250514-line.yml',
-        // '/_data/news/20250513-crowdfunding.yml',
-        // '/_data/news/20250501-holiday.yml'
+        // ニュースファイルを取得
+        const newsFiles = await getNewsFiles();
         
         // 各ファイルのデータを取得
         const newsPromises = newsFiles.map(async filePath => {
@@ -90,55 +109,121 @@ async function loadNewsData() {
     }
 }
 
-// YAMLデータをパースする関数
-function parseYaml(yamlText, filePath) {
+// YAMLまたはMarkdownデータをパースする関数
+function parseYaml(text, filePath) {
     try {
-        const lines = yamlText.split('\n');
         const data = {};
         
         // ファイル名からIDを抽出
         const filename = filePath.split('/').pop();
-        data.id = filename.replace('.yml', '');
+        data.id = filename.replace(/\.(yml|md)$/, '');
         
-        // 各行を解析
-        let currentKey = null;
-        let currentValue = '';
+        // Markdown形式かどうかを確認
+        const isMarkdown = filePath.endsWith('.md');
         
-        lines.forEach(line => {
-            const trimmedLine = line.trim();
+        // Markdown形式の場合はフロントマターを抽出
+        if (isMarkdown) {
+            // フロントマターを抽出する正規表現
+            const frontMatterRegex = /^---\n([\s\S]*?)\n---\n/;
+            const match = text.match(frontMatterRegex);
             
-            // 空行はスキップ
-            if (!trimmedLine) return;
-            
-            // キーと値のペアを探す
-            if (trimmedLine.includes(':')) {
-                // 前のキーの処理を完了する
+            if (match && match[1]) {
+                // フロントマターを解析
+                const frontMatter = match[1];
+                const lines = frontMatter.split('\n');
+                
+                let currentKey = null;
+                let currentValue = '';
+                let inMultilineValue = false;
+                
+                lines.forEach(line => {
+                    const trimmedLine = line.trim();
+                    
+                    // 空行はスキップ
+                    if (!trimmedLine) return;
+                    
+                    // 複数行の値の開始または終了をチェック
+                    if (trimmedLine === '|-' || trimmedLine === '|+' || trimmedLine === '|') {
+                        inMultilineValue = true;
+                        return;
+                    }
+                    
+                    // キーと値のペアを探す
+                    if (!inMultilineValue && trimmedLine.includes(':')) {
+                        // 前のキーの処理を完了する
+                        if (currentKey && currentValue) {
+                            data[currentKey] = currentValue.trim();
+                            currentValue = '';
+                        }
+                        
+                        const colonIndex = trimmedLine.indexOf(':');
+                        const key = trimmedLine.substring(0, colonIndex).trim();
+                        const value = trimmedLine.substring(colonIndex + 1).trim();
+                        
+                        currentKey = key;
+                        
+                        // 値が空でない場合は保存
+                        if (value && value !== '|-' && value !== '|+' && value !== '|') {
+                            // 値が引用符で囲まれている場合は除去
+                            data[currentKey] = value.replace(/^["'](.+)["']$/, '$1');
+                            currentKey = null;
+                            inMultilineValue = false;
+                        } else {
+                            inMultilineValue = true;
+                        }
+                    } else if (currentKey) {
+                        // 複数行の値の場合は追加
+                        currentValue += (currentValue ? '\n' : '') + trimmedLine;
+                    }
+                });
+                
+                // 最後のキーの処理
                 if (currentKey && currentValue) {
                     data[currentKey] = currentValue.trim();
-                    currentValue = '';
                 }
-                
-                const colonIndex = trimmedLine.indexOf(':');
-                const key = trimmedLine.substring(0, colonIndex).trim();
-                const value = trimmedLine.substring(colonIndex + 1).trim();
-                
-                currentKey = key;
-                
-                // 値が空でない場合は保存
-                if (value) {
-                    // 値が引用符で囲まれている場合は除去
-                    data[currentKey] = value.replace(/^["'](.+)["']$/, '$1');
-                    currentKey = null;
-                }
-            } else if (currentKey) {
-                // 複数行の値の場合は追加
-                currentValue += (currentValue ? '\n' : '') + trimmedLine;
             }
-        });
-        
-        // 最後のキーの処理
-        if (currentKey && currentValue) {
-            data[currentKey] = currentValue.trim();
+        } else {
+            // YAML形式の場合の解析
+            const lines = text.split('\n');
+            let currentKey = null;
+            let currentValue = '';
+            
+            lines.forEach(line => {
+                const trimmedLine = line.trim();
+                
+                // 空行はスキップ
+                if (!trimmedLine) return;
+                
+                // キーと値のペアを探す
+                if (trimmedLine.includes(':')) {
+                    // 前のキーの処理を完了する
+                    if (currentKey && currentValue) {
+                        data[currentKey] = currentValue.trim();
+                        currentValue = '';
+                    }
+                    
+                    const colonIndex = trimmedLine.indexOf(':');
+                    const key = trimmedLine.substring(0, colonIndex).trim();
+                    const value = trimmedLine.substring(colonIndex + 1).trim();
+                    
+                    currentKey = key;
+                    
+                    // 値が空でない場合は保存
+                    if (value) {
+                        // 値が引用符で囲まれている場合は除去
+                        data[currentKey] = value.replace(/^["'](.+)["']$/, '$1');
+                        currentKey = null;
+                    }
+                } else if (currentKey) {
+                    // 複数行の値の場合は追加
+                    currentValue += (currentValue ? '\n' : '') + trimmedLine;
+                }
+            });
+            
+            // 最後のキーの処理
+            if (currentKey && currentValue) {
+                data[currentKey] = currentValue.trim();
+            }
         }
         
         // published が文字列の場合は変換
@@ -147,7 +232,7 @@ function parseYaml(yamlText, filePath) {
         
         return data;
     } catch (e) {
-        console.error('Error parsing YAML:', e);
+        console.error('Error parsing file:', e);
         return null;
     }
 }
