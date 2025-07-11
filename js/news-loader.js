@@ -91,18 +91,24 @@ async function loadNewsData() {
         }
         
         // モーダル要素を作成
-        const modalOverlay = document.createElement('div');
+        let modalOverlay = document.getElementById('news-modal-overlay');
+        
+        // 既存のモーダルがあれば削除
+        if (modalOverlay) {
+            document.body.removeChild(modalOverlay);
+        }
+        
+        // 新しいモーダルを作成
+        modalOverlay = document.createElement('div');
         modalOverlay.id = 'news-modal-overlay';
-        modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center';
-        modalOverlay.addEventListener('click', function(e) {
-            if (e.target === modalOverlay) {
-                modalOverlay.classList.add('hidden');
-            }
-        });
+        modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 hidden';
+        modalOverlay.style.display = 'none';
+        modalOverlay.style.alignItems = 'center';
+        modalOverlay.style.justifyContent = 'center';
         
         const modalContent = document.createElement('div');
         modalContent.id = 'news-modal-content';
-        modalContent.className = 'bg-white p-6 rounded-lg max-w-lg w-full max-h-[80vh] overflow-y-auto';
+        modalContent.className = 'bg-white p-6 rounded-lg max-w-lg w-full max-h-[80vh] overflow-y-auto relative';
         modalContent.innerHTML = `
             <div class="flex justify-between items-center mb-4">
                 <h3 id="modal-title" class="text-xl font-bold"></h3>
@@ -121,29 +127,49 @@ async function loadNewsData() {
         modalOverlay.appendChild(modalContent);
         document.body.appendChild(modalOverlay);
         
+        // モーダルの表示・非表示関数
+        function showModal(title, date, content) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-date').textContent = date;
+            document.getElementById('modal-content').textContent = content || '';
+            modalOverlay.style.display = 'flex';
+        }
+        
+        function hideModal() {
+            modalOverlay.style.display = 'none';
+        }
+        
         // モーダルの閉じるボタンのイベントリスナー
-        document.getElementById('modal-close').addEventListener('click', function() {
-            modalOverlay.classList.add('hidden');
+        document.getElementById('modal-close').addEventListener('click', hideModal);
+        
+        // モーダルの外側をクリックしたときに閉じる
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                hideModal();
+            }
         });
         
         // HTMLを生成
         if (validNewsData.length > 0) {
             validNewsData.forEach(item => {
+                // 記事の内容から最初の一文を取得
+                const firstSentence = item.content ? item.content.split('\n')[0].substring(0, 100) : '';
+                
                 const newsElement = document.createElement('div');
-                newsElement.className = 'border-b border-gray-200 pb-6 cursor-pointer hover:bg-gray-50';
+                newsElement.className = 'border-b border-gray-200 py-4 cursor-pointer hover:bg-gray-50 transition duration-200';
                 newsElement.innerHTML = `
-                    <div class="flex items-center mb-2">
-                        <span class="text-turquoise font-semibold mr-4">${item.date}</span>
-                        <h3 class="text-xl font-semibold">${item.title}</h3>
+                    <div class="flex items-start">
+                        <span class="text-turquoise font-semibold mr-4 w-24 flex-shrink-0">${item.date}</span>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-1">${item.title}</h3>
+                            <p class="text-gray-600 text-sm line-clamp-1">${firstSentence}</p>
+                        </div>
                     </div>
                 `;
                 
                 // クリックイベントでモーダルを表示
                 newsElement.addEventListener('click', function() {
-                    document.getElementById('modal-title').textContent = item.title;
-                    document.getElementById('modal-date').textContent = item.date;
-                    document.getElementById('modal-content').textContent = item.content || '';
-                    modalOverlay.classList.remove('hidden');
+                    showModal(item.title, item.date, item.content);
                 });
                 
                 newsContainer.appendChild(newsElement);
