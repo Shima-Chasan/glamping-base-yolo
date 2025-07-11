@@ -90,18 +90,62 @@ async function loadNewsData() {
             validNewsData.push(testArticle);
         }
         
+        // モーダル要素を作成
+        const modalOverlay = document.createElement('div');
+        modalOverlay.id = 'news-modal-overlay';
+        modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center';
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.add('hidden');
+            }
+        });
+        
+        const modalContent = document.createElement('div');
+        modalContent.id = 'news-modal-content';
+        modalContent.className = 'bg-white p-6 rounded-lg max-w-lg w-full max-h-[80vh] overflow-y-auto';
+        modalContent.innerHTML = `
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-xl font-bold"></h3>
+                <button id="modal-close" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="mb-2">
+                <span id="modal-date" class="text-sm text-turquoise font-semibold"></span>
+            </div>
+            <div id="modal-content" class="text-gray-700 whitespace-pre-line"></div>
+        `;
+        
+        modalOverlay.appendChild(modalContent);
+        document.body.appendChild(modalOverlay);
+        
+        // モーダルの閉じるボタンのイベントリスナー
+        document.getElementById('modal-close').addEventListener('click', function() {
+            modalOverlay.classList.add('hidden');
+        });
+        
         // HTMLを生成
         if (validNewsData.length > 0) {
             validNewsData.forEach(item => {
                 const newsElement = document.createElement('div');
-                newsElement.className = 'border-b border-gray-200 pb-6';
+                newsElement.className = 'border-b border-gray-200 pb-6 cursor-pointer hover:bg-gray-50';
                 newsElement.innerHTML = `
                     <div class="flex items-center mb-2">
-                        <span class="text-sm text-gray-500">${item.date}</span>
+                        <span class="text-turquoise font-semibold mr-4">${item.date}</span>
+                        <h3 class="text-xl font-semibold">${item.title}</h3>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">${item.title}</h3>
-                    <div class="text-gray-700 whitespace-pre-line">${item.content || ''}</div>
                 `;
+                
+                // クリックイベントでモーダルを表示
+                newsElement.addEventListener('click', function() {
+                    document.getElementById('modal-title').textContent = item.title;
+                    document.getElementById('modal-date').textContent = item.date;
+                    document.getElementById('modal-content').textContent = item.content || '';
+                    modalOverlay.classList.remove('hidden');
+                });
+                
                 newsContainer.appendChild(newsElement);
             });
         } else {
