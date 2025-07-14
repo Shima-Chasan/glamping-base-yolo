@@ -1,0 +1,8 @@
+{
+  "name": "glamping-base-yolo-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for Glamping Base YOLO",
+  "dependencies": {
+    "@octokit/rest": "^18.12.0"
+  }
+}
