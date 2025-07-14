@@ -1,0 +1,25 @@
+---
+layout: base.njk
+pagination:
+  data: news
+  size: 1
+  alias: article
+permalink: "/news/{{ article.id }}/"
+---
+
+<div class="container mx-auto px-4 py-12">
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-4xl font-bold mb-4">{{ article.title }}</h1>
+    <p class="text-gray-600 mb-8">{{ article.date }}</p>
+    
+    <div class="prose max-w-none">
+      {{ article.content | safe }}
+    </div>
+    
+    <div class="mt-12">
+      <a href="/news/" class="inline-block bg-turquoise text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition duration-300">
+        ← お知らせ一覧に戻る
+      </a>
+    </div>
+  </div>
+</div>

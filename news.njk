@@ -1,0 +1,32 @@
+---
+layout: base.njk
+title: お知らせ
+permalink: /news/index.html
+---
+
+<div class="container mx-auto px-4 py-12">
+  <h1 class="text-4xl font-bold mb-8">お知らせ</h1>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for article in news %}
+      <div class="bg-white rounded-lg shadow-md overflow-hidden news-item">
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2 line-clamp-1">{{ article.title }}</h3>
+          <p class="text-gray-600 mb-4">{{ article.date }}</p>
+          <div class="text-gray-700 mb-4 line-clamp-3">
+            {{ article.content | striptags | truncate(100) }}
+          </div>
+          <a href="/news/{{ article.id }}/" class="text-turquoise hover:underline">詳しく見る</a>
+        </div>
+      </div>
+    {% endfor %}
+    
+    {% if news.length === 0 %}
+      <div class="col-span-full text-center py-8">
+        <p>現在お知らせはありません。</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Eleventyでページが生成されるため、動的なロードは不要 -->
