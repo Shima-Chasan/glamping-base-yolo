@@ -185,8 +185,18 @@ async function loadNewsData() {
             let contentText = content || '';
             contentText = contentText.replace(/published:\s*true/g, '').trim();
             // バックスラッシュを削除
-            contentText = contentText.replace(/\\/g, '').trim();
-            document.getElementById('modal-content').textContent = contentText;
+            contentText = contentText.replace(/\\\\/g, '').trim();
+            
+            // Markdownの画像構文をHTMLに変換
+            // ![alt text](/images/uploads/image.jpg "title") または ![alt text](/images/uploads/image.jpg) や ![](/images/uploads/image.jpg)
+            contentText = contentText.replace(/!\[(.*?)\]\(([^\s"]+)(?:\s+"(.*?)")?\)/g, '<img src="$2" alt="$1" title="$3" class="w-full rounded-lg shadow-md my-4">');
+            
+            // Shortcode形式の画像も変換 (!\[pool\]\(/images/uploads/image.jpg "alt text"\))
+            contentText = contentText.replace(/!\[pool\]\(([^\s"]+)(?:\s+"(.*?)")?\)/g, '<img src="$1" alt="$2" class="w-full rounded-lg shadow-md my-4">');
+            
+            // コンテンツをHTMLとして設定
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = contentText;
             
             modalOverlay.style.display = 'flex';
         }
@@ -214,6 +224,11 @@ async function loadNewsData() {
                 contentText = contentText.replace(/published:\s*true/g, '').trim();
                 // バックスラッシュを削除
                 contentText = contentText.replace(/\\/g, '').trim();
+                // Markdownの画像構文を除去
+                contentText = contentText.replace(/!\[(.*?)\]\([^\)]+\)/g, '').trim();
+                // Shortcode形式の画像も除去
+                contentText = contentText.replace(/!\[pool\]\([^\)]+\)/g, '').trim();
+                
                 const firstSentence = contentText ? contentText.split('\n')[0].substring(0, 100) : '';
                 
                 const newsElement = document.createElement('div');
@@ -229,6 +244,7 @@ async function loadNewsData() {
                     this.style.backgroundColor = '';
                     this.style.boxShadow = 'none';
                 });
+                
                 newsElement.innerHTML = `
                     <div class="flex items-start">
                         <span class="text-turquoise font-semibold mr-4 w-24 flex-shrink-0">${item.date}</span>
