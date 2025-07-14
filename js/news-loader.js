@@ -36,11 +36,31 @@ async function loadNewsData() {
         if (newsFiles.length === 0) {
             try {
                 // ニュースディレクトリのファイル一覧を取得する試み
-                const possibleFiles = [
-                    '20250710-テスト.md',
-                    '20250714-テスト２.md',
-                    '20250714-テスト３.md'
-                ];
+                // ファイル名のパターンを生成
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                
+                // 過去3ヶ月分のファイルを探索する
+                const possibleFiles = [];
+                
+                // 既存のファイルを追加
+                possibleFiles.push('20250714-テスト２.md');
+                possibleFiles.push('20250714-テスト３.md');
+                possibleFiles.push('20250714-テスト４.md');
+                
+                // 日付パターンで探索するファイルを追加
+                for (let i = 0; i < 3; i++) {
+                    const testDate = new Date();
+                    testDate.setMonth(testDate.getMonth() - i);
+                    const testYear = testDate.getFullYear();
+                    const testMonth = String(testDate.getMonth() + 1).padStart(2, '0');
+                    
+                    // 各月のパターンを追加
+                    possibleFiles.push(`${testYear}${testMonth}01-*.md`);
+                    possibleFiles.push(`${testYear}${testMonth}15-*.md`);
+                    possibleFiles.push(`${testYear}${testMonth}*-*.md`);
+                }
                 
                 // 各ファイルが存在するか確認
                 const fileCheckPromises = possibleFiles.map(async filename => {
@@ -66,7 +86,8 @@ async function loadNewsData() {
             if (newsFiles.length === 0) {
                 newsFiles = [
                     '/_data/news/20250714-テスト２.md',
-                    '/_data/news/20250714-テスト３.md'
+                    '/_data/news/20250714-テスト３.md',
+                    '/_data/news/20250714-テスト４.md'
                 ];
                 console.log('フォールバック: 既知のニュースファイルを使用:', newsFiles);
             }
