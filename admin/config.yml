@@ -1,8 +1,10 @@
 # バックエンド設定
 backend:
-  name: git-gateway
-  branch: main # GitHubのブランチ名
+  name: github
   repo: Shima-Chasan/glamping-base-yolo
+  branch: main # GitHubのブランチ名
+  # Netlifyの環境変数を参照
+  token: ${GITHUB_TOKEN}
 media_folder: "images/uploads" # メディアファイルのアップロード先
 public_folder: "/images/uploads" # 公開時のパス
 
