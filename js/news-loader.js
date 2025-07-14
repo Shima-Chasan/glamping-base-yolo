@@ -15,13 +15,31 @@ async function loadNewsData() {
         // キャッシュバスト用のランダムクエリパラメータを生成
         const cacheBuster = `?_=${new Date().getTime()}`;
         
-        // ニュースファイルのリストを直接指定
-        // ディレクトリ一覧の取得はセキュリティ上の制限があるため、既知のファイルを指定
-        const newsFiles = [
-            '/_data/news/20250710-テスト.md'
-        ];
+        // ニュースファイルのリストを取得するために、index.jsonを使用
+        let newsFiles = [];
         
-        console.log('読み込むニュースファイル:', newsFiles);
+        try {
+            // index.jsonからニュースファイルのリストを取得
+            const indexResponse = await fetch(`/_data/news/index.json${cacheBuster}`);
+            if (indexResponse.ok) {
+                const indexData = await indexResponse.json();
+                if (Array.isArray(indexData.files)) {
+                    newsFiles = indexData.files.map(file => `/_data/news/${file}`);
+                    console.log('index.jsonから読み込んだニュースファイル:', newsFiles);
+                }
+            }
+        } catch (e) {
+            console.error('index.jsonの読み込みエラー:', e);
+        }
+        
+        // index.jsonから取得できなかった場合は、既知のファイルを使用
+        if (newsFiles.length === 0) {
+            newsFiles = [
+                '/_data/news/20250710-テスト.md',
+                '/_data/news/20250714-テスト２.md'
+            ];
+            console.log('フォールバック: 既知のニュースファイルを使用:', newsFiles);
+        }
         
         // 各ファイルのデータを取得
         const newsPromises = newsFiles.map(async filePath => {
