@@ -1,0 +1,24 @@
+---
+layout: base
+title: お知らせ一覧
+---
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8">お知らせ</h1>
+  
+  <div class="space-y-8">
+    {% for post in collections.news | reverse %}
+      <div class="border-b pb-6">
+        <h2 class="text-xl font-bold mb-2">
+          <a href="{{ post.url }}" class="hover:text-turquoise transition duration-300">{{ post.data.title }}</a>
+        </h2>
+        <time datetime="{{ post.data.date }}" class="text-gray-600 block mb-3">{{ post.data.date | date("%Y.%m.%d") }}</time>
+        <div class="prose max-w-none line-clamp-3">
+          {{ post.templateContent | safe | striptags | truncate(150) }}
+        </div>
+        <div class="mt-3">
+          <a href="{{ post.url }}" class="text-turquoise hover:underline">続きを読む</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

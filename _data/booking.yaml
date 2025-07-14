@@ -1,0 +1,45 @@
+options:
+  roomTypes:
+    - id: deluxe
+      name: デラックステント
+      price: 30000
+      description: 広々としたテントで、贅沢なグランピング体験を。
+      capacity: 4
+    - id: premium
+      name: プレミアムテント
+      price: 45000
+      description: 最高級の設備を備えた、究極のグランピング体験。
+      capacity: 2
+    - id: family
+      name: ファミリーテント
+      price: 40000
+      description: ご家族でのグランピングに最適な広々テント。
+      capacity: 6
+      
+  mealOptions:
+    - id: breakfast
+      name: 朝食付き
+      price: 2000
+      description: 地元の食材を使った朝食をお楽しみいただけます。
+    - id: dinner
+      name: 夕食付き
+      price: 5000
+      description: シェフ特製のディナーコースをテント前でお召し上がりいただけます。
+    - id: bbq
+      name: BBQセット
+      price: 8000
+      description: 地元の新鮮な食材を使ったBBQセットをご用意します。
+      
+  activityOptions:
+    - id: yoga
+      name: 森のヨガ体験
+      price: 3000
+      description: 自然の中でのヨガ体験で心身ともにリフレッシュ。
+    - id: trekking
+      name: トレッキングツアー
+      price: 5000
+      description: 専門ガイドと一緒に、周辺の自然を探索するツアー。
+    - id: stargazing
+      name: 星空観察会
+      price: 2000
+      description: 満天の星空を専門家の解説付きで観察できます。

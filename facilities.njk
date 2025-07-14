@@ -1,0 +1,52 @@
+---
+layout: base.njk
+title: 施設情報 | グランピングベース YOLO
+---
+
+<div class="container mx-auto px-4 py-12">
+  <h1 class="text-4xl font-bold text-center mb-12">施設情報</h1>
+  
+  <!-- アメニティセクション -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-bold mb-8">アメニティ</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for amenity in facilities.amenities %}
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="{{ amenity.image }}" alt="{{ amenity.name }}" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">{{ amenity.name }}</h3>
+            <p class="text-gray-700 mb-4">{{ amenity.description }}</p>
+            <div class="prose">
+              {{ amenity.details | safe }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  
+  <!-- 客室セクション -->
+  <section>
+    <h2 class="text-3xl font-bold mb-8">客室タイプ</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for room in facilities.rooms %}
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="{{ room.image }}" alt="{{ room.name }}" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">{{ room.name }}</h3>
+            <p class="text-gray-700 mb-4">{{ room.description }}</p>
+            <div class="flex justify-between mb-4">
+              <span class="text-gray-600">定員: {{ room.capacity }}</span>
+              <span class="text-turquoise font-bold">{{ room.price }}</span>
+            </div>
+            <div class="prose">
+              {{ room.details | safe }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>

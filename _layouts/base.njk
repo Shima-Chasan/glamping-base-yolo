@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} - {% endif %}glamping base YOLO - 星空とジャングルで、ととのう休暇を。</title>
+    <meta name="description" content="沖縄北部、今帰仁村の自然に囲まれたグランピング施設。ファンシーで快適なテントでの宿泊、BBQ、プール、サウナを楽しめます。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* line-clampクラスのスタイル定義 */
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        turquoise: '#1EC2C8',
+                        sunset: '#FF9B6A',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- スライドショー用のスタイル -->
+    <style>
+        .slideshow-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .fade {
+            animation-name: fade;
+            animation-duration: 16s;
+            animation-iteration-count: infinite;
+        }
+
+        .slide:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .slide:nth-child(2) {
+            animation-delay: 4s;
+        }
+
+        .slide:nth-child(3) {
+            animation-delay: 8s;
+        }
+        
+        .slide:nth-child(4) {
+            animation-delay: 12s;
+        }
+
+        @keyframes fade {
+            0%, 22% { opacity: 1; }
+            25%, 97% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        /* 多重ドロップシャドウスタイル */
+        .hero-text {
+            text-shadow: 
+                0 1px 0 #000,
+                1px 1px 0 #000,
+                1px 2px 1px rgba(0,0,0,0.6),
+                1px 3px 1px rgba(0,0,0,0.6),
+                2px 4px 2px rgba(0,0,0,0.4),
+                2px 5px 3px rgba(0,0,0,0.4),
+                3px 6px 5px rgba(0,0,0,0.3);
+        }
+    </style>
+    
+    <!-- 固定予約ボタンのスタイル -->
+    <style>
+        .fixed-reservation-button {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+            background-color: #FF9B6A; /* サンセットカラー */
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        /* モバイル用に小さく調整 */
+        @media (max-width: 768px) {
+            .fixed-reservation-button {
+                padding: 8px 12px;
+                bottom: 60px;
+                right: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .fixed-reservation-button i {
+                font-size: 1.2rem;
+                margin-bottom: 3px;
+            }
+        }
+        
+        .fixed-reservation-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .fixed-reservation-button i {
+            margin-bottom: 5px;
+            font-size: 1.5rem;
+        }
+    </style>
+    
+    <!-- カスタムCSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-white text-gray-800">
+<!-- ナビゲーション -->
+<nav class="bg-white shadow-md fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <a href="/" class="font-playfair text-2xl md:text-2xl font-bold text-turquoise hover:opacity-70 transition duration-300 ease-in-out"><span class="md:inline text-xl md:text-2xl">glamping base YOLO</span></a>
+            </div>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="/#about" class="relative px-1 group">
+                    <span>施設紹介</span>
+                    <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="/#rooms" class="relative px-1 group">
+                    <span>客室</span>
+                    <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="/#services" class="relative px-1 group">
+                    <span>サービス</span>
+                    <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="/news/" class="relative px-1 group">
+                    <span>お知らせ</span>
+                    <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="/#booking" class="relative px-1 group">
+                    <span>ご予約</span>
+                    <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="/#faq" class="relative px-1 group">
+                    <span>FAQ</span>
+                    <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="/#access" class="relative px-1 group">
+                    <span>アクセス</span>
+                    <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="https://www.instagram.com/nakijin_glamping/" target="_blank" rel="noopener noreferrer" class="social-icon ml-2">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-500 hover:opacity-70 focus:outline-none transition duration-300">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- モバイルメニュー -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="/#about" class="block px-3 py-2 rounded relative group">
+                <span>施設紹介</span>
+                <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="/#rooms" class="block px-3 py-2 rounded relative group">
+                <span>客室</span>
+                <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="/#services" class="block px-3 py-2 rounded relative group">
+                <span>サービス</span>
+                <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="/news/" class="block px-3 py-2 rounded relative group">
+                <span>お知らせ</span>
+                <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="/#booking" class="block px-3 py-2 rounded relative group">
+                <span>ご予約</span>
+                <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="/#faq" class="block px-3 py-2 rounded relative group">
+                <span>FAQ</span>
+                <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="/#access" class="block px-3 py-2 rounded relative group">
+                <span>アクセス</span>
+                <span class="absolute left-0 bottom-[-4px] w-0 h-0.5 bg-gray-800 group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="https://www.instagram.com/nakijin_glamping/" target="_blank" rel="noopener noreferrer" class="block px-3 py-2 rounded flex items-center">
+                <span class="flex items-center">
+                    <span class="social-icon mr-2 w-8 h-8 flex items-center justify-center">
+                        <i class="fab fa-instagram"></i>
+                    </span>
+                    Instagram
+                </span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<main class="pt-20">
+    {{ content | safe }}
+</main>
+
+<!-- フッター -->
+<footer class="bg-gray-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+            <div class="mb-6 md:mb-0">
+                <a href="/" class="font-playfair text-2xl font-bold hover:opacity-70 transition duration-300 ease-in-out">glamping base YOLO</a>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+                <div class="flex items-center">
+                    <i class="fas fa-envelope text-turquoise mr-2"></i>
+                    <span>yolo@okibull856.com</span>
+                </div>
+                
+                <a href="https://www.instagram.com/nakijin_glamping/" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-700">
+            
+            <div class="mb-4 md:mb-0">
+                <p class="text-sm text-gray-400 mb-2"><a href="/privacy-policy.html" class="hover:opacity-70 transition duration-300 ease-in-out">プライバシーポリシー</a></p>
+                <p class="text-sm text-gray-400">&copy; 2025 glamping base YOLO. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- 固定予約ボタン -->
+<a href="/#booking" class="fixed-reservation-button">
+    <i class="fas fa-paper-plane"></i>
+    <div class="text-center">
+        <div>ご予約</div>
+        <div>お問い合わせ</div>
+    </div>
+</a>
+
+<script src="/js/main.js"></script>
+
+<!-- Netlify Identity リダイレクトスクリプト -->
+<script>
+    if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+            if (!user) {
+                window.netlifyIdentity.on("login", () => {
+                    document.location.href = "/admin/";
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

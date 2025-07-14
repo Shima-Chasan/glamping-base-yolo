@@ -1,0 +1,181 @@
+---
+layout: base.njk
+title: ご予約 | グランピングベース YOLO
+---
+
+<div class="container mx-auto px-4 py-12">
+  <h1 class="text-4xl font-bold text-center mb-12">ご予約</h1>
+  
+  <form id="booking-form" class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    <!-- 日程選択 -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">ご宿泊日</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="check-in" class="block text-gray-700 mb-2">チェックイン</label>
+          <input type="date" id="check-in" name="check-in" class="w-full p-3 border border-gray-300 rounded-lg" required>
+        </div>
+        <div>
+          <label for="check-out" class="block text-gray-700 mb-2">チェックアウト</label>
+          <input type="date" id="check-out" name="check-out" class="w-full p-3 border border-gray-300 rounded-lg" required>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 人数選択 -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">ご宿泊人数</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="adults" class="block text-gray-700 mb-2">大人</label>
+          <select id="adults" name="adults" class="w-full p-3 border border-gray-300 rounded-lg" required>
+            {% for i in range(1, 11) %}
+              <option value="{{ i }}">{{ i }}名</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="children" class="block text-gray-700 mb-2">お子様（12歳未満）</label>
+          <select id="children" name="children" class="w-full p-3 border border-gray-300 rounded-lg">
+            {% for i in range(0, 11) %}
+              <option value="{{ i }}">{{ i }}名</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 客室タイプ選択 -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">客室タイプ</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for room in booking.roomTypes %}
+          <div class="border border-gray-200 rounded-lg p-4 hover:border-turquoise cursor-pointer room-option">
+            <input type="radio" id="room-{{ room.id }}" name="room-type" value="{{ room.id }}" class="hidden room-radio" required>
+            <label for="room-{{ room.id }}" class="cursor-pointer block">
+              <h3 class="text-xl font-bold mb-2">{{ room.name }}</h3>
+              <p class="text-gray-700 mb-2">{{ room.description }}</p>
+              <div class="flex justify-between">
+                <span class="text-gray-600">定員: {{ room.capacity }}名まで</span>
+                <span class="text-turquoise font-bold">¥{{ room.price | toLocaleString }}〜</span>
+              </div>
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <!-- オプション選択 -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">お食事オプション</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for meal in booking.mealOptions %}
+          <div class="border border-gray-200 rounded-lg p-4 hover:border-turquoise cursor-pointer option-item">
+            <input type="checkbox" id="meal-{{ meal.id }}" name="meal-options[]" value="{{ meal.id }}" class="hidden option-checkbox">
+            <label for="meal-{{ meal.id }}" class="cursor-pointer block">
+              <h3 class="text-xl font-bold mb-2">{{ meal.name }}</h3>
+              <p class="text-gray-700 mb-2">{{ meal.description }}</p>
+              <span class="text-turquoise font-bold">¥{{ meal.price | toLocaleString }}</span>
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">アクティビティオプション</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for activity in booking.activityOptions %}
+          <div class="border border-gray-200 rounded-lg p-4 hover:border-turquoise cursor-pointer option-item">
+            <input type="checkbox" id="activity-{{ activity.id }}" name="activity-options[]" value="{{ activity.id }}" class="hidden option-checkbox">
+            <label for="activity-{{ activity.id }}" class="cursor-pointer block">
+              <h3 class="text-xl font-bold mb-2">{{ activity.name }}</h3>
+              <p class="text-gray-700 mb-2">{{ activity.description }}</p>
+              <span class="text-turquoise font-bold">¥{{ activity.price | toLocaleString }}</span>
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <!-- お客様情報 -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">お客様情報</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="name" class="block text-gray-700 mb-2">お名前</label>
+          <input type="text" id="name" name="name" class="w-full p-3 border border-gray-300 rounded-lg" required>
+        </div>
+        <div>
+          <label for="email" class="block text-gray-700 mb-2">メールアドレス</label>
+          <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg" required>
+        </div>
+        <div>
+          <label for="phone" class="block text-gray-700 mb-2">電話番号</label>
+          <input type="tel" id="phone" name="phone" class="w-full p-3 border border-gray-300 rounded-lg" required>
+        </div>
+        <div>
+          <label for="special-requests" class="block text-gray-700 mb-2">特別なご要望</label>
+          <textarea id="special-requests" name="special-requests" class="w-full p-3 border border-gray-300 rounded-lg h-32"></textarea>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 予約確認 -->
+    <div class="text-center">
+      <button type="submit" class="bg-turquoise text-white px-8 py-3 rounded-full text-lg font-bold hover:bg-turquoise-dark transition duration-300">予約を確認する</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 客室タイプの選択処理
+    const roomOptions = document.querySelectorAll('.room-option');
+    roomOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        // 他の選択を解除
+        roomOptions.forEach(item => {
+          item.classList.remove('border-turquoise', 'border-2');
+          item.querySelector('input').checked = false;
+        });
+        
+        // 選択したアイテムをハイライト
+        this.classList.add('border-turquoise', 'border-2');
+        this.querySelector('input').checked = true;
+      });
+    });
+    
+    // オプションの選択処理
+    const optionItems = document.querySelectorAll('.option-item');
+    optionItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const checkbox = this.querySelector('input');
+        checkbox.checked = !checkbox.checked;
+        
+        if (checkbox.checked) {
+          this.classList.add('border-turquoise', 'border-2');
+        } else {
+          this.classList.remove('border-turquoise', 'border-2');
+        }
+      });
+    });
+    
+    // フォーム送信処理
+    document.getElementById('booking-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // ここに予約処理のコードを追加
+      alert('予約リクエストを受け付けました。確認メールをお送りします。');
+      
+      // フォームをリセット
+      this.reset();
+      roomOptions.forEach(item => {
+        item.classList.remove('border-turquoise', 'border-2');
+      });
+      optionItems.forEach(item => {
+        item.classList.remove('border-turquoise', 'border-2');
+      });
+    });
+  });
+</script>
