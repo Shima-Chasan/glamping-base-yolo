@@ -184,8 +184,9 @@ async function loadNewsData() {
             // published: trueを除去して表示、バックスラッシュも削除
             let contentText = content || '';
             contentText = contentText.replace(/published:\s*true/g, '').trim();
-            // バックスラッシュを削除
+            // バックスラッシュを削除 (改行時の\\\\ や \\ などを全て削除)
             contentText = contentText.replace(/\\\\/g, '').trim();
+            contentText = contentText.replace(/\\/g, '').trim();
             
             // Markdownの画像構文をHTMLに変換
             // ![alt text](/images/uploads/image.jpg "title") または ![alt text](/images/uploads/image.jpg) や ![](/images/uploads/image.jpg)
@@ -219,10 +220,11 @@ async function loadNewsData() {
         if (validNewsData.length > 0) {
             validNewsData.forEach(item => {
                 // 記事の内容から最初の一文を取得
-                // publishedの文字を除去して表示、バックスラッシュも削除
+                // published: trueを除去して表示、バックスラッシュも削除
                 let contentText = item.content || '';
                 contentText = contentText.replace(/published:\s*true/g, '').trim();
-                // バックスラッシュを削除
+                // バックスラッシュを削除 (改行時の\\\\ や \\ などを全て削除)
+                contentText = contentText.replace(/\\\\/g, '').trim();
                 contentText = contentText.replace(/\\/g, '').trim();
                 // Markdownの画像構文を除去
                 contentText = contentText.replace(/!\[(.*?)\]\([^\)]+\)/g, '').trim();
@@ -294,7 +296,7 @@ function parseYaml(text, filePath) {
         // Markdown形式かどうかを確認
         const isMarkdown = filePath.endsWith('.md');
         
-        // Markdown形式の場合はフロントマターを抽出
+        // Markdown形式の場合はフロントマターと本文を抽出
         if (isMarkdown) {
             // フロントマターを抽出する正規表現
             const frontMatterRegex = /^---\n([\s\S]*?)\n---\n/;
@@ -354,6 +356,20 @@ function parseYaml(text, filePath) {
                 if (currentKey && currentValue) {
                     data[currentKey] = currentValue.trim();
                 }
+            }
+            
+            // フロントマター以降の本文を抽出
+            let content = text;
+            if (match && match[0]) {
+                content = text.replace(match[0], '');
+            }
+            
+            // 本文からバックスラッシュを除去
+            content = content.replace(/\\\\/g, '').replace(/\\/g, '');
+            
+            // 本文をデータに設定
+            if (!data.content) {
+                data.content = content.trim();
             }
         } else {
             // YAML形式の場合の解析
