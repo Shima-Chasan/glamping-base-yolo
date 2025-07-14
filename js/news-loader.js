@@ -132,11 +132,11 @@ async function loadNewsData() {
             document.getElementById('modal-title').textContent = title;
             document.getElementById('modal-date').textContent = date;
             
-            // published: trueを除去して表示、末尾のスラッシュも削除
+            // published: trueを除去して表示、バックスラッシュも削除
             let contentText = content || '';
             contentText = contentText.replace(/published:\s*true/g, '').trim();
-            // 末尾のスラッシュを削除
-            contentText = contentText.replace(/\\\s*$/g, '').trim();
+            // バックスラッシュを削除
+            contentText = contentText.replace(/\\/g, '').trim();
             document.getElementById('modal-content').textContent = contentText;
             
             modalOverlay.style.display = 'flex';
@@ -160,30 +160,25 @@ async function loadNewsData() {
         if (validNewsData.length > 0) {
             validNewsData.forEach(item => {
                 // 記事の内容から最初の一文を取得
-                // publishedの文字を除去して表示、末尾のスラッシュも削除
+                // publishedの文字を除去して表示、バックスラッシュも削除
                 let contentText = item.content || '';
                 contentText = contentText.replace(/published:\s*true/g, '').trim();
-                // 末尾のスラッシュを削除
-                contentText = contentText.replace(/\\\s*$/g, '').trim();
+                // バックスラッシュを削除
+                contentText = contentText.replace(/\\/g, '').trim();
                 const firstSentence = contentText ? contentText.split('\n')[0].substring(0, 100) : '';
                 
                 const newsElement = document.createElement('div');
                 newsElement.className = 'border-b border-gray-200 py-4 cursor-pointer transition duration-300 relative';
                 
-                // ホバーエフェクトをナビゲーションメニュー風に変更
+                // ホバーエフェクトを背景色変更に修正
                 newsElement.addEventListener('mouseenter', function() {
-                    const titleElement = this.querySelector('h3');
-                    if (titleElement) {
-                        titleElement.style.textDecoration = 'underline';
-                        titleElement.style.textUnderlineOffset = '4px';
-                    }
+                    this.style.backgroundColor = '#ffffff';
+                    this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.05)';
                 });
                 
                 newsElement.addEventListener('mouseleave', function() {
-                    const titleElement = this.querySelector('h3');
-                    if (titleElement) {
-                        titleElement.style.textDecoration = 'none';
-                    }
+                    this.style.backgroundColor = '';
+                    this.style.boxShadow = 'none';
                 });
                 newsElement.innerHTML = `
                     <div class="flex items-start">
