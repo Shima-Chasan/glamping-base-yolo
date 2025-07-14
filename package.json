@@ -1,0 +1,12 @@
+{
+  "name": "glamping-base-yolo",
+  "version": "1.0.0",
+  "description": "Glamping Base YOLO Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@octokit/rest": "^18.12.0"
+  }
+}

@@ -32,13 +32,44 @@ async function loadNewsData() {
             console.error('index.jsonの読み込みエラー:', e);
         }
         
-        // index.jsonから取得できなかった場合は、既知のファイルを使用
+        // index.jsonから取得できなかった場合は、ファイル名パターンから探索する
         if (newsFiles.length === 0) {
-            newsFiles = [
-                '/_data/news/20250710-テスト.md',
-                '/_data/news/20250714-テスト２.md'
-            ];
-            console.log('フォールバック: 既知のニュースファイルを使用:', newsFiles);
+            try {
+                // ニュースディレクトリのファイル一覧を取得する試み
+                const possibleFiles = [
+                    '20250710-テスト.md',
+                    '20250714-テスト２.md',
+                    '20250714-テスト３.md'
+                ];
+                
+                // 各ファイルが存在するか確認
+                const fileCheckPromises = possibleFiles.map(async filename => {
+                    const path = `/_data/news/${filename}`;
+                    try {
+                        const response = await fetch(`${path}${cacheBuster}`, { method: 'HEAD' });
+                        return response.ok ? path : null;
+                    } catch (e) {
+                        return null;
+                    }
+                });
+                
+                const validFiles = (await Promise.all(fileCheckPromises)).filter(Boolean);
+                if (validFiles.length > 0) {
+                    newsFiles = validFiles;
+                    console.log('ファイル存在確認から取得したニュースファイル:', newsFiles);
+                }
+            } catch (e) {
+                console.error('ファイル探索エラー:', e);
+            }
+            
+            // それでもファイルが見つからない場合は、既知のファイルを使用
+            if (newsFiles.length === 0) {
+                newsFiles = [
+                    '/_data/news/20250714-テスト２.md',
+                    '/_data/news/20250714-テスト３.md'
+                ];
+                console.log('フォールバック: 既知のニュースファイルを使用:', newsFiles);
+            }
         }
         
         // 各ファイルのデータを取得

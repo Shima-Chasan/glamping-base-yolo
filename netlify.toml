@@ -1,8 +1,15 @@
 [build]
   publish = "."
   command = ""
+  functions = "functions"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
+  status = 200
+
+# GitHub Webhookを処理する関数へのパス
+[[redirects]]
+  from = "/api/update-news-index"
+  to = "/.netlify/functions/update-news-index"
   status = 200
