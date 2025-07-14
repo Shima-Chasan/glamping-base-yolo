@@ -131,7 +131,12 @@ async function loadNewsData() {
         function showModal(title, date, content) {
             document.getElementById('modal-title').textContent = title;
             document.getElementById('modal-date').textContent = date;
-            document.getElementById('modal-content').textContent = content || '';
+            
+            // published: trueを除去して表示
+            let contentText = content || '';
+            contentText = contentText.replace(/published:\s*true/g, '').trim();
+            document.getElementById('modal-content').textContent = contentText;
+            
             modalOverlay.style.display = 'flex';
         }
         
@@ -153,10 +158,26 @@ async function loadNewsData() {
         if (validNewsData.length > 0) {
             validNewsData.forEach(item => {
                 // 記事の内容から最初の一文を取得
-                const firstSentence = item.content ? item.content.split('\n')[0].substring(0, 100) : '';
+                // publishedの文字を除去して表示
+                let contentText = item.content || '';
+                contentText = contentText.replace(/published:\s*true/g, '').trim();
+                const firstSentence = contentText ? contentText.split('\n')[0].substring(0, 100) : '';
                 
                 const newsElement = document.createElement('div');
-                newsElement.className = 'border-b border-gray-200 py-4 cursor-pointer hover:bg-gray-50 transition duration-200';
+                newsElement.className = 'border-b border-gray-200 py-4 cursor-pointer transition duration-300 relative';
+                
+                // ホバーエフェクトを強化
+                newsElement.addEventListener('mouseenter', function() {
+                    this.classList.add('bg-gray-50');
+                    this.style.transform = 'translateX(5px)';
+                    this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.05)';
+                });
+                
+                newsElement.addEventListener('mouseleave', function() {
+                    this.classList.remove('bg-gray-50');
+                    this.style.transform = 'translateX(0)';
+                    this.style.boxShadow = 'none';
+                });
                 newsElement.innerHTML = `
                     <div class="flex items-start">
                         <span class="text-turquoise font-semibold mr-4 w-24 flex-shrink-0">${item.date}</span>
