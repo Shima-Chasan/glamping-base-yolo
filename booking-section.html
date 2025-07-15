@@ -6,29 +6,204 @@
             <p class="text-xl font-semibold text-gray-700">ご予約・お問い合わせ</p>
         </div>
         
-        <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex flex-col md:flex-row gap-8">
             <!-- 問い合わせフォーム -->
             <div class="lg:w-1/2">
                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-xl font-semibold mb-4">お問い合わせ</h3>
+                    <h3 class="text-xl font-semibold mb-4">ご予約・お問い合わせ</h3>
+                    
+                    <!-- フォームタイプ選択 -->
+                    <div class="mb-6">
+                        <div class="flex justify-center space-x-4">
+                            <button type="button" id="reservation-tab" class="px-4 py-2 bg-turquoise text-white rounded-md font-medium">ご予約</button>
+                            <button type="button" id="inquiry-tab" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md font-medium">お問い合わせ</button>
+                        </div>
+                    </div>
+                    
                     <form id="contact-form" name="contact" method="POST" data-netlify="true">
                         <input type="hidden" name="form-name" value="contact">
+                        <input type="hidden" id="form-type" name="form-type" value="reservation">
+                        
+                        <!-- 共通フィールド -->
                         <div class="mb-4">
                             <label for="name" class="block text-gray-700 mb-2">お名前 <span class="text-red-500">*</span></label>
                             <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
                         </div>
-                        <div class="mb-4">
-                            <label for="email" class="block text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
-                            <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                        
+                        <!-- 予約専用フィールド -->
+                        <div id="reservation-fields">
+                            <div class="mb-4">
+                                <label for="furigana" class="block text-gray-700 mb-2">フリガナ <span class="text-red-500">*</span></label>
+                                <input type="text" id="furigana" name="furigana" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
+                                <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                            </div>
+                            <div class="mb-4">
+                                <label for="phone" class="block text-gray-700 mb-2">電話番号 <span class="text-red-500">*</span></label>
+                                <input type="tel" id="phone" name="phone" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                            </div>
                         </div>
-                        <div class="mb-4">
-                            <label for="phone" class="block text-gray-700 mb-2">電話番号</label>
-                            <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                        
+                        <!-- 共通フィールドの続き -->
+                        
+                        <!-- 予約専用フィールドの続き -->
+                        <div id="reservation-fields-continued">
+                            <div class="mb-4">
+                                <label for="postal-code" class="block text-gray-700 mb-2">郵便番号 <span class="text-red-500">*</span></label>
+                                <input type="text" id="postal-code" name="postal-code" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                            </div>
+                            <div class="mb-4">
+                                <label for="address" class="block text-gray-700 mb-2">ご住所 <span class="text-red-500">*</span></label>
+                                <input type="text" id="address" name="address" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                            </div>
+                            <div class="mb-4">
+                                <label for="check-in-date" class="block text-gray-700 mb-2">ご希望日程 <span class="text-red-500">*</span></label>
+                                <input type="date" id="check-in-date" name="check-in-date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="stay-duration" class="block text-gray-700 mb-2">宿泊日数 <span class="text-red-500">*</span></label>
+                                <select id="stay-duration" name="stay-duration" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                                    <option value="1">1泊2日</option>
+                                    <option value="2">2泊3日</option>
+                                    <option value="3">3泊4日</option>
+                                    <option value="4">4泊5日</option>
+                                    <option value="5">5泊6日</option>
+                                    <option value="6">6泊7日</option>
+                                    <option value="7">7泊8日</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">ご宿泊人数 <span class="text-red-500">*</span></label>
+                                <div class="flex flex-wrap gap-4">
+                                    <div class="flex items-center">
+                                        <input type="number" id="adults" name="adults" min="1" value="1" class="w-16 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                                        <span class="ml-1">人</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <label for="infants" class="mr-2">幼児（6歳未満）</label>
+                                        <input type="number" id="infants" name="infants" min="0" value="0" class="w-16 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                                        <span class="ml-1">人</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="check-in-time" class="block text-gray-700 mb-2">チェックイン予定時間 <span class="text-red-500">*</span></label>
+                                <select id="check-in-time" name="check-in-time" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                                    <option value="15:00 - 15:30">15:00 - 15:30</option>
+                                    <option value="15:30 - 16:00">15:30 - 16:00</option>
+                                    <option value="16:00 - 16:30">16:00 - 16:30</option>
+                                    <option value="16:30 - 17:00">16:30 - 17:00</option>
+                                    <option value="17:00 - 17:30">17:00 - 17:30</option>
+                                    <option value="17:30 - 18:00">17:30 - 18:00</option>
+                                    <option value="18:00 - 18:30">18:00 - 18:30</option>
+                                    <option value="18:30 - 19:00">18:30 - 19:00</option>
+                                    <option value="19:00 - 19:30">19:00 - 19:30</option>
+                                    <option value="19:30 - 20:00">19:30 - 20:00</option>
+                                </select>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <h4 class="font-medium mb-3">ご希望サービス</h4>
+                                    <div class="space-y-2">
+                                        <div>
+                                            <input type="checkbox" id="service-aromatherapy" name="services[]" value="アロマ・ボディトリートメント">
+                                            <label for="service-aromatherapy" class="ml-2">アロマ・ボディトリートメント</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="service-facial" name="services[]" value="フェイシャル＆ヘッドスパトリートメント">
+                                            <label for="service-facial" class="ml-2">フェイシャル＆ヘッドスパトリートメント</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="service-sauna" name="services[]" value="薪サウナ">
+                                            <label for="service-sauna" class="ml-2">薪サウナ</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="service-jungle" name="services[]" value="ジャングルツアー">
+                                            <label for="service-jungle" class="ml-2">ジャングルツアー</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="service-fishing" name="services[]" value="釣り体験">
+                                            <label for="service-fishing" class="ml-2">釣り体験</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="service-pottery" name="services[]" value="宝石箱作り">
+                                            <label for="service-pottery" class="ml-2">宝石箱作り</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="service-shisa" name="services[]" value="琉球陶器シーサー作り">
+                                            <label for="service-shisa" class="ml-2">琉球陶器シーサー作り</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-medium mb-3">オプション</h4>
+                                    <div class="space-y-2">
+                                        <div>
+                                            <input type="checkbox" id="option-meal" name="options[]" value="よりグル">
+                                            <label for="option-meal" class="ml-2">よりグル</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="option-bbq" name="options[]" value="BBQレンタルフル">
+                                            <label for="option-bbq" class="ml-2">BBQレンタルフル</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="option-breakfast" name="options[]" value="朝食">
+                                            <label for="option-breakfast" class="ml-2">朝食</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="option-sup" name="options[]" value="SUP">
+                                            <label for="option-sup" class="ml-2">SUP</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="option-kayak" name="options[]" value="カヤック">
+                                            <label for="option-kayak" class="ml-2">カヤック</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="option-inclusive" name="options[]" value="All Inclusive Stay">
+                                            <label for="option-inclusive" class="ml-2">All Inclusive Stay</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="option-anniversary" name="options[]" value="アニバーサリープラン">
+                                            <label for="option-anniversary" class="ml-2">アニバーサリープラン</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="option-checkout" name="options[]" value="レイトチェックアウト">
+                                            <label for="option-checkout" class="ml-2">レイトチェックアウト</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-4">
-                            <label for="message" class="block text-gray-700 mb-2">お問い合わせ内容 <span class="text-red-500">*</span></label>
-                            <textarea id="message" name="message" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise"></textarea>
+                        
+                        <!-- お問い合わせ専用フィールド -->
+                        <div id="inquiry-fields" class="hidden">
+                            <div class="mb-4">
+                                <label for="email-inquiry" class="block text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
+                                <input type="email" id="email-inquiry" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                            </div>
+                            <div class="mb-4">
+                                <label for="phone-inquiry" class="block text-gray-700 mb-2">電話番号</label>
+                                <input type="tel" id="phone-inquiry" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                            </div>
+                            <div class="mb-4">
+                                <label for="inquiry-message" class="block text-gray-700 mb-2">お問い合わせ内容 <span class="text-red-500">*</span></label>
+                                <textarea id="inquiry-message" name="inquiry-message" rows="6" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise" placeholder="お問い合わせ内容をご記入ください"></textarea>
+                            </div>
                         </div>
+                        
+                        <!-- 共通メッセージフィールド -->
+                        <div id="reservation-message-field" class="mb-4">
+                            <label for="message" class="block text-gray-700 mb-2">その他のご要望 <span class="text-red-500">*</span></label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise" placeholder="その他のご要望や質問などがございましたら、お気軽にお書きください。"></textarea>
+                        </div>
+                        
                         <div class="text-center">
                             <button type="submit" class="bg-turquoise hover:bg-teal-500 text-white px-6 py-2 rounded-md transition">送信する</button>
                         </div>
@@ -88,14 +263,12 @@
                         <p class="mt-2 text-sm text-gray-600">※ 台風などの自然災害の場合は、状況に応じて対応いたします。</p>
                     </div>
                     
-                    <!-- 予約ボタン -->
-                    <div class="mt-6 text-center">
-                        <a href="https://example.com/booking" target="_blank" class="bg-sunset text-white rounded-full px-6 py-3 shadow-lg inline-block hover:scale-105 transition duration-300">
-                            <i class="fas fa-calendar-check mr-2"></i>予約サイトへ
-                        </a>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- フォーム切り替え用スクリプト -->
+<script src="js/form-switcher.js"></script>
