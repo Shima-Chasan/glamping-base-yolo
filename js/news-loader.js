@@ -44,10 +44,8 @@ async function loadNewsData() {
                 // 過去3ヶ月分のファイルを探索する
                 const possibleFiles = [];
                 
-                // 既存のファイルを追加
-                possibleFiles.push('20250714-テスト２.md');
-                possibleFiles.push('20250714-テスト３.md');
-                possibleFiles.push('20250714-テスト４.md');
+                // テスト記事の参照を削除
+                // 日付パターンのみで探索
                 
                 // 日付パターンで探索するファイルを追加
                 for (let i = 0; i < 3; i++) {
@@ -82,14 +80,10 @@ async function loadNewsData() {
                 console.error('ファイル探索エラー:', e);
             }
             
-            // それでもファイルが見つからない場合は、既知のファイルを使用
+            // ファイルが見つからない場合は空の配列を使用
             if (newsFiles.length === 0) {
-                newsFiles = [
-                    '/_data/news/20250714-テスト２.md',
-                    '/_data/news/20250714-テスト３.md',
-                    '/_data/news/20250714-テスト４.md'
-                ];
-                console.log('フォールバック: 既知のニュースファイルを使用:', newsFiles);
+                console.log('ニュースファイルが見つかりません');
+                // 空の配列のまま処理を続ける
             }
         }
         
