@@ -139,19 +139,10 @@ async function loadNewsData() {
         // ニュースコンテナをクリア
         newsContainer.innerHTML = '';
         
-        // テスト記事を強制的に表示
+        // データがない場合は空のまま表示
         if (validNewsData.length === 0) {
-            // テスト記事を手動で追加
-            const testArticle = {
-                id: '20250710-テスト',
-                title: 'テスト',
-                date: '2025.07.10',
-                content: 'テストのお知らせです。\n公式サイトを公開しました！',
-                published: true
-            };
-            
-            console.log('データがないため、テスト記事を追加:', testArticle);
-            validNewsData.push(testArticle);
+            console.log('ニュースデータがありません');
+            // 空のまま表示するため、何も追加しない
         }
         
         // モーダル要素を作成
