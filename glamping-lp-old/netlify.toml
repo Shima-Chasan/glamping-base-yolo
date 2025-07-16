@@ -1,0 +1,9 @@
+[build]
+  base = "glamping-lp"
+  command = "./copy-to-dist.sh"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
