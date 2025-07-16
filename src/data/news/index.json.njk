@@ -1,10 +1,12 @@
 ---
-permalink: /data/news/index.json
-eleventyExcludeFromCollections: true
+permalink: /data/news/index.json       # 出力先を固定
+eleventyExcludeFromCollections: true   # 他コレクションに混ざらない
 ---
 {
   "files": [
-    "20250716-テスト投稿です！.md",
-    "20250716-テスト投稿（再）.md"
+    {%- for item in collections.news | reverse -%}
+      "{{ item.inputPath | replace('_data/news/', '') }}"
+      {%- if not loop.last -%},{%- endif -%}
+    {%- endfor -%}
   ]
 }
