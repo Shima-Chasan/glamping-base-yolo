@@ -2,6 +2,15 @@
 backend:
   name: git-gateway
   branch: main # GitHubのブランチ名
+  commit_messages:
+    create: '新規記事「{{slug}}」を作成しました'
+    update: '記事「{{slug}}」を更新しました'
+    delete: '記事「{{slug}}」を削除しました'
+    uploadMedia: 'メディア「{{path}}」をアップロードしました'
+    deleteMedia: 'メディア「{{path}}」を削除しました'
+
+# エディトリアルワークフローを無効化
+# publish_mode: editorial_workflow
 media_folder: "images/uploads" # メディアファイルのアップロード先
 public_folder: "/images/uploads" # 公開時のパス
 
