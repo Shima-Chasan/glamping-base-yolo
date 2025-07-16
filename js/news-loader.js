@@ -224,52 +224,92 @@ async function loadNewsData() {
         
         // HTMLを生成
         if (validNewsData.length > 0) {
-            validNewsData.forEach(item => {
-                // 記事の内容から最初の一文を取得
-                // published: trueを除去して表示、バックスラッシュも削除
-                let contentText = item.content || '';
-                contentText = contentText.replace(/published:\s*true/g, '').trim();
-                // バックスラッシュを削除 (改行時の\\\\ や \\ などを全て削除)
-                contentText = contentText.replace(/\\\\/g, '').trim();
-                contentText = contentText.replace(/\\/g, '').trim();
-                // Markdownの画像構文を除去
-                contentText = contentText.replace(/!\[(.*?)\]\([^\)]+\)/g, '').trim();
-                // Shortcode形式の画像も除去
-                contentText = contentText.replace(/!\[pool\]\([^\)]+\)/g, '').trim();
+            // 表示件数の設定
+            const initialDisplayCount = 3;
+            let currentDisplayCount = initialDisplayCount;
+            
+            // 記事を表示する関数
+            const renderNewsItems = (count) => {
+                // 表示する記事数を制限
+                const itemsToShow = validNewsData.slice(0, count);
                 
-                const firstSentence = contentText ? contentText.split('\n')[0].substring(0, 100) : '';
+                // コンテナをクリア
+                newsContainer.innerHTML = '';
                 
-                const newsElement = document.createElement('div');
-                newsElement.className = 'border-b border-gray-200 py-4 cursor-pointer transition duration-300 relative';
-                
-                // ホバーエフェクトを背景色変更に修正
-                newsElement.addEventListener('mouseenter', function() {
-                    this.style.backgroundColor = '#ffffff';
-                    this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.05)';
-                });
-                
-                newsElement.addEventListener('mouseleave', function() {
-                    this.style.backgroundColor = '';
-                    this.style.boxShadow = 'none';
-                });
-                
-                newsElement.innerHTML = `
-                    <div class="flex items-start">
-                        <span class="text-turquoise font-semibold mr-4 w-24 flex-shrink-0">${item.date}</span>
-                        <div>
-                            <h3 class="text-lg font-semibold mb-1">${item.title}</h3>
-                            <p class="text-gray-600 text-sm line-clamp-1">${firstSentence}</p>
+                // 記事を表示
+                itemsToShow.forEach(item => {
+                    // 記事の内容から最初の一文を取得
+                    // published: trueを除去して表示、バックスラッシュも削除
+                    let contentText = item.content || '';
+                    contentText = contentText.replace(/published:\s*true/g, '').trim();
+                    // バックスラッシュを削除 (改行時の\\\\ や \\ などを全て削除)
+                    contentText = contentText.replace(/\\\\/g, '').trim();
+                    contentText = contentText.replace(/\\/g, '').trim();
+                    // Markdownの画像構文を除去
+                    contentText = contentText.replace(/!\[(.*?)\]\([^\)]+\)/g, '').trim();
+                    // Shortcode形式の画像も除去
+                    contentText = contentText.replace(/!\[pool\]\([^\)]+\)/g, '').trim();
+                    
+                    const firstSentence = contentText ? contentText.split('\n')[0].substring(0, 100) : '';
+                    
+                    const newsElement = document.createElement('div');
+                    newsElement.className = 'border-b border-gray-200 py-4 cursor-pointer transition duration-300 relative';
+                    
+                    // ホバーエフェクトを背景色変更に修正
+                    newsElement.addEventListener('mouseenter', function() {
+                        this.style.backgroundColor = '#ffffff';
+                        this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.05)';
+                    });
+                    
+                    newsElement.addEventListener('mouseleave', function() {
+                        this.style.backgroundColor = '';
+                        this.style.boxShadow = 'none';
+                    });
+                    
+                    newsElement.innerHTML = `
+                        <div class="flex items-start">
+                            <span class="text-turquoise font-semibold mr-4 w-24 flex-shrink-0">${item.date}</span>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-1">${item.title}</h3>
+                                <p class="text-gray-600 text-sm line-clamp-1">${firstSentence}</p>
+                            </div>
                         </div>
-                    </div>
-                `;
-                
-                // クリックイベントでモーダルを表示
-                newsElement.addEventListener('click', function() {
-                    showModal(item.title, item.date, item.content);
+                    `;
+                    
+                    // クリックイベントでモーダルを表示
+                    newsElement.addEventListener('click', function() {
+                        showModal(item.title, item.date, item.content);
+                    });
+                    
+                    newsContainer.appendChild(newsElement);
                 });
                 
-                newsContainer.appendChild(newsElement);
-            });
+                // もっと見るボタンの表示/非表示
+                if (count < validNewsData.length) {
+                    const loadMoreButton = document.createElement('div');
+                    loadMoreButton.className = 'text-center mt-4';
+                    loadMoreButton.innerHTML = `
+                        <button class="bg-turquoise hover:bg-turquoise-dark text-white font-bold py-2 px-6 rounded-full transition duration-300 flex items-center mx-auto">
+                            <span>もっと見る</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    `;
+                    
+                    // クリックイベントで追加表示
+                    loadMoreButton.querySelector('button').addEventListener('click', function() {
+                        currentDisplayCount += initialDisplayCount;
+                        renderNewsItems(currentDisplayCount);
+                    });
+                    
+                    newsContainer.appendChild(loadMoreButton);
+                }
+            };
+            
+            // 初期表示
+            renderNewsItems(currentDisplayCount);
+            
         } else {
             newsContainer.innerHTML = `
                 <div class="text-center py-8">
