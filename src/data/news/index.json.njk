@@ -1,7 +1,10 @@
+---
+permalink: /data/news/index.json
+eleventyExcludeFromCollections: true
+---
 {
   "files": [
-    {% for item in collections.news -%}
-      "{{ item.fileSlug }}.md"{% if not loop.last %},{% endif %}
-    {%- endfor %}
+    "20250716-テスト投稿です！.md",
+    "20250716-テスト投稿（再）.md"
   ]
 }
