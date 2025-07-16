@@ -20,11 +20,11 @@ async function loadNewsData() {
         
         try {
             // index.jsonからニュースファイルのリストを取得
-            const indexResponse = await fetch(`/_data/news/index.json${cacheBuster}`);
+            const indexResponse = await fetch(`/data/news/index.json${cacheBuster}`);
             if (indexResponse.ok) {
                 const indexData = await indexResponse.json();
                 if (Array.isArray(indexData.files)) {
-                    newsFiles = indexData.files.map(file => `/_data/news/${file}`);
+                    newsFiles = indexData.files.map(file => `/data/news/${file}`);
                     console.log('index.jsonから読み込んだニュースファイル:', newsFiles);
                 }
             }

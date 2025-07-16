@@ -1,0 +1,8 @@
+{% set files = collections.news | map(attribute="fileSlug") %}
+{
+  "files": [
+    {% for f in files -%}
+      "{{ f }}.md"{% if not loop.last %},{% endif %}
+    {%- endfor %}
+  ]
+}
