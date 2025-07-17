@@ -4,6 +4,16 @@
   functions = "functions"
 
 [[redirects]]
+  from = "/thanks"
+  to = "/thanks.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact-thanks"
+  to = "/contact-thanks.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
