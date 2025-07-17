@@ -550,31 +550,7 @@
         <!-- センタータブを削除し、各カード内に移動 -->
         
         <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Netlifyフォーム検出用の静的なフォーム - 予約用 -->  
-            <form name="reservation" netlify netlify-honeypot="bot-field" hidden>
-                <input type="text" name="name" />
-                <input type="text" name="furigana" />
-                <input type="email" name="email" />
-                <input type="tel" name="phone" />
-                <input type="text" name="postal-code" />
-                <input type="text" name="address" />
-                <input type="date" name="check-in-date" />
-                <select name="stay-duration"></select>
-                <input type="number" name="adults" />
-                <input type="number" name="infants" />
-                <input type="checkbox" name="options[]" />
-                <select name="check-in-time"></select>
-                <textarea name="message"></textarea>
-            </form>
-            
-            <!-- Netlifyフォーム検出用の静的なフォーム - お問い合わせ用 -->
-            <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-                <input type="text" name="name" />
-                <input type="email" name="email" />
-                <input type="tel" name="phone" />
-                <textarea name="message"></textarea>
-            </form>
-            
+
             <!-- 予約フォーム -->
             <div id="reservation-wrapper" class="lg:w-1/2">
                 <div class="bg-white rounded-lg shadow-lg p-6">
