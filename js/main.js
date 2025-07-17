@@ -73,27 +73,39 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(contactForm);
             const formStatus = document.getElementById('form-status');
             
-            // 実際のNetlify Formsの送信処理
+            // 送信中メッセージを表示
+            formStatus.textContent = '送信中...';
+            formStatus.classList.remove('hidden', 'text-red-500', 'text-green-500');
+            formStatus.classList.add('text-gray-500');
+            
+            // Netlify Formsの送信処理
             fetch('/', {
                 method: 'POST',
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response;
             })
             .then(() => {
                 contactForm.reset();
                 if (formStatus) {
                     formStatus.textContent = 'お問い合わせありがとうございます。担当者から連絡いたします。';
-                    formStatus.classList.remove('hidden', 'text-red-500');
+                    formStatus.classList.remove('hidden', 'text-red-500', 'text-gray-500');
                     formStatus.classList.add('text-green-500');
                 }
+                // 成功時にthanksページにリダイレクト
+                window.location.href = '/thanks.html';
             })
             .catch((error) => {
                 if (formStatus) {
                     formStatus.textContent = '送信中にエラーが発生しました。後ほど再度お試しください。';
-                    formStatus.classList.remove('hidden', 'text-green-500');
+                    formStatus.classList.remove('hidden', 'text-green-500', 'text-gray-500');
                     formStatus.classList.add('text-red-500');
                 }
-                console.error(error);
+                console.error('Form submission error:', error);
             });
         });
     }
