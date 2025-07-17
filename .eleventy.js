@@ -6,7 +6,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("thanks.html");
-  eleventyConfig.addPassthroughCopy("contact-thanks.html");
 
   // データの変更を監視
   eleventyConfig.addWatchTarget("./_data/");

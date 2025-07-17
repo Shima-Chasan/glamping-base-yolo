@@ -10,7 +10,7 @@
 
 [[redirects]]
   from = "/contact-thanks"
-  to = "/contact-thanks.html"
+  to = "/contact-thanks/"
   status = 200
 
 [[redirects]]
