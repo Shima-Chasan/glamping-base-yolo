@@ -68,45 +68,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+            // デフォルトの送信動作を防止しない
+            // e.preventDefault(); を削除して通常のフォーム送信を許可
             
-            const formData = new FormData(contactForm);
             const formStatus = document.getElementById('form-status');
             
             // 送信中メッセージを表示
-            formStatus.textContent = '送信中...';
-            formStatus.classList.remove('hidden', 'text-red-500', 'text-green-500');
-            formStatus.classList.add('text-gray-500');
+            if (formStatus) {
+                formStatus.textContent = '送信中...';
+                formStatus.classList.remove('hidden', 'text-red-500', 'text-green-500');
+                formStatus.classList.add('text-gray-500');
+            }
             
-            // Netlify Formsの送信処理
-            fetch('/', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response;
-            })
-            .then(() => {
-                contactForm.reset();
-                if (formStatus) {
-                    formStatus.textContent = 'お問い合わせありがとうございます。担当者から連絡いたします。';
-                    formStatus.classList.remove('hidden', 'text-red-500', 'text-gray-500');
-                    formStatus.classList.add('text-green-500');
-                }
-                // 成功時にthanksページにリダイレクト
-                window.location.href = '/thanks.html';
-            })
-            .catch((error) => {
-                if (formStatus) {
-                    formStatus.textContent = '送信中にエラーが発生しました。後ほど再度お試しください。';
-                    formStatus.classList.remove('hidden', 'text-green-500', 'text-gray-500');
-                    formStatus.classList.add('text-red-500');
-                }
-                console.error('Form submission error:', error);
-            });
+            // フォーム送信は通常のブラウザの送信処理に任せる
+            // Netlifyが自動的に処理してくれる
+            
+            // エラーハンドリングは必要ない
+            // 成功時はフォームのaction属性に指定したページにリダイレクトされる
         });
     }
 });
