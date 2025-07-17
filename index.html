@@ -564,7 +564,6 @@
                     <!-- 実際に表示される予約フォーム -->
                     <form id="reservation-form" name="reservation" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
                         <input type="hidden" name="form-name" value="reservation">
-                        <input type="hidden" name="success_url" value="/thanks.html">
                         <p hidden>
                             <label>Don't fill this out: <input name="bot-field"></label>
                         </p>
@@ -708,9 +707,8 @@
                     <h3 class="text-xl font-semibold mb-4">お問い合わせ</h3>
                     
                     <!-- 実際に表示されるお問い合わせフォーム -->
-                    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact-thanks.html">
+                    <form id="contact-form" name="contact" method="POST" action="/contact-thanks.html" data-netlify="true" netlify-honeypot="bot-field">
                         <input type="hidden" name="form-name" value="contact">
-                        <input type="hidden" name="success_url" value="/contact-thanks.html">
                         <p hidden>
                             <label>Don't fill this out: <input name="bot-field"></label>
                         </p>
