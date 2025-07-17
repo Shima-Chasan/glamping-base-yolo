@@ -547,32 +547,50 @@
             <p class="text-xl font-semibold text-gray-700">ご予約・お問い合わせ</p>
         </div>
         
+        <!-- センタータブを削除し、各カード内に移動 -->
+        
         <div class="flex flex-col lg:flex-row gap-8">
-            <!-- 問い合わせフォーム -->
-            <div class="lg:w-1/2">
+            <!-- Netlifyフォーム検出用の静的なフォーム - 予約用 -->  
+            <form name="reservation" netlify netlify-honeypot="bot-field" hidden>
+                <input type="text" name="name" />
+                <input type="text" name="furigana" />
+                <input type="email" name="email" />
+                <input type="tel" name="phone" />
+                <input type="text" name="postal-code" />
+                <input type="text" name="address" />
+                <input type="date" name="check-in-date" />
+                <select name="stay-duration"></select>
+                <input type="number" name="adults" />
+                <input type="number" name="infants" />
+                <input type="checkbox" name="options[]" />
+                <select name="check-in-time"></select>
+                <textarea name="message"></textarea>
+            </form>
+            
+            <!-- Netlifyフォーム検出用の静的なフォーム - お問い合わせ用 -->
+            <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <input type="tel" name="phone" />
+                <textarea name="message"></textarea>
+            </form>
+            
+            <!-- 予約フォーム -->
+            <div id="reservation-wrapper" class="lg:w-1/2">
                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-xl font-semibold mb-4">ご予約・お問い合わせ</h3>
-                    <!-- Netlifyフォーム検出用の静的なフォーム -->  
-                    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-                        <input type="text" name="name" />
-                        <input type="email" name="email" />
-                        <input type="tel" name="phone" />
-                        <textarea name="message"></textarea>
-                    </form>
+                    <!-- カード内タブ切り替え -->
+                    <div class="flex mb-6">
+                        <button type="button" id="reservation-tab" class="tab-button flex-1 py-2 px-4 bg-turquoise text-white rounded-l-md focus:outline-none">ご予約</button>
+                        <button type="button" id="inquiry-tab" class="tab-button flex-1 py-2 px-4 bg-gray-200 text-gray-700 rounded-r-md focus:outline-none">お問い合わせ</button>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">ご予約</h3>
                     
-                    <!-- 実際に表示されるフォーム -->
-                    <form id="contact-form" name="contact" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
-                        <input type="hidden" name="form-name" value="contact">
-                        <input type="hidden" id="form-type" name="form-type" value="reservation">
+                    <!-- 実際に表示される予約フォーム -->
+                    <form id="reservation-form" name="reservation" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="reservation">
                         <p hidden>
                             <label>Don't fill this out: <input name="bot-field"></label>
                         </p>
-                        
-                        <!-- タブ切り替え -->
-                        <div class="flex mb-6">
-                            <button type="button" id="reservation-tab" class="flex-1 py-2 px-4 bg-turquoise text-white rounded-l-md focus:outline-none">ご予約</button>
-                            <button type="button" id="inquiry-tab" class="flex-1 py-2 px-4 bg-gray-200 text-gray-700 rounded-r-md focus:outline-none">お問い合わせ</button>
-                        </div>
                         
                         <!-- 共通フィールド -->
                         <div class="mb-4">
@@ -711,7 +729,53 @@
                             </div>
                             <p class="text-sm text-gray-600 text-center mt-2">※6名様以上やオプションの料金は、<br>別途お支払いのご案内をお送りいたします。</p>
                         </div>
-                        <p id="form-status" class="mt-4 text-center hidden"></p>
+                        <p id="reservation-form-status" class="mt-4 text-center hidden"></p>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- お問い合わせフォーム -->
+            <div id="contact-wrapper" class="lg:w-1/2 hidden">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <!-- カード内タブ切り替え -->
+                    <div class="flex mb-6">
+                        <button type="button" id="reservation-tab-contact" class="tab-button flex-1 py-2 px-4 bg-gray-200 text-gray-700 rounded-l-md focus:outline-none">ご予約</button>
+                        <button type="button" id="inquiry-tab-contact" class="tab-button flex-1 py-2 px-4 bg-turquoise text-white rounded-r-md focus:outline-none">お問い合わせ</button>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">お問い合わせ</h3>
+                    
+                    <!-- 実際に表示されるお問い合わせフォーム -->
+                    <form id="contact-form" name="contact" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="contact">
+                        <p hidden>
+                            <label>Don't fill this out: <input name="bot-field"></label>
+                        </p>
+                        
+                        <div class="mb-4">
+                            <label for="contact-name" class="block text-gray-700 mb-2">お名前 <span class="text-red-500">*</span></label>
+                            <input type="text" id="contact-name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="contact-email" class="block text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
+                            <input type="email" id="contact-email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="contact-phone" class="block text-gray-700 mb-2">電話番号</label>
+                            <input type="tel" id="contact-phone" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="contact-message" class="block text-gray-700 mb-2">お問い合わせ内容 <span class="text-red-500">*</span></label>
+                            <textarea id="contact-message" name="message" rows="6" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-turquoise" placeholder="お問い合わせ内容をご記入ください"></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="bg-turquoise text-white px-6 py-3 rounded-full shadow-lg hover:scale-105 transition duration-300">送信する</button>
+                        </div>
+                        
+                        <p id="contact-form-status" class="mt-4 text-center hidden"></p>
                     </form>
                 </div>
             </div>

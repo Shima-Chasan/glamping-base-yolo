@@ -1,81 +1,63 @@
+/**
+ * 予約フォームとお問い合わせフォームの切り替え処理
+ * Netlify Forms用に完全に分離された2つのフォームを切り替えます
+ * カード内タブ切り替え対応版
+ */
 document.addEventListener('DOMContentLoaded', function() {
-    // タブ要素の取得
+    // フォームラッパーの取得
+    const reservationWrapper = document.getElementById('reservation-wrapper');
+    const contactWrapper = document.getElementById('contact-wrapper');
+    
+    // すべてのタブボタンを取得
     const reservationTab = document.getElementById('reservation-tab');
     const inquiryTab = document.getElementById('inquiry-tab');
-    
-    // フォームフィールドの取得
-    const reservationFields = document.getElementById('reservation-fields');
-    const inquiryFields = document.getElementById('inquiry-fields');
-    const reservationMessageField = document.getElementById('reservation-message-field');
-    const formTypeInput = document.getElementById('form-type');
+    const reservationTabContact = document.getElementById('reservation-tab-contact');
+    const inquiryTabContact = document.getElementById('inquiry-tab-contact');
     
     // 予約タブがクリックされたときの処理
-    reservationTab.addEventListener('click', function() {
-        // タブのスタイル変更
+    function showReservationForm() {
+        // 予約カードのタブスタイル変更
         reservationTab.classList.remove('bg-gray-200', 'text-gray-700');
         reservationTab.classList.add('bg-turquoise', 'text-white');
         inquiryTab.classList.remove('bg-turquoise', 'text-white');
         inquiryTab.classList.add('bg-gray-200', 'text-gray-700');
         
-        // フィールドの表示/非表示
-        reservationFields.classList.remove('hidden');
-        inquiryFields.classList.add('hidden');
-        reservationMessageField.classList.remove('hidden');
+        // お問い合わせカードのタブスタイル変更
+        reservationTabContact.classList.remove('bg-gray-200', 'text-gray-700');
+        reservationTabContact.classList.add('bg-turquoise', 'text-white');
+        inquiryTabContact.classList.remove('bg-turquoise', 'text-white');
+        inquiryTabContact.classList.add('bg-gray-200', 'text-gray-700');
         
-        // フォームタイプの設定
-        formTypeInput.value = 'reservation';
-        
-        // 必須フィールドの設定
-        toggleRequiredFields(true);
-    });
+        // フォームの表示/非表示
+        reservationWrapper.classList.remove('hidden');
+        contactWrapper.classList.add('hidden');
+    }
     
     // お問い合わせタブがクリックされたときの処理
-    inquiryTab.addEventListener('click', function() {
-        // タブのスタイル変更
+    function showContactForm() {
+        // 予約カードのタブスタイル変更
         inquiryTab.classList.remove('bg-gray-200', 'text-gray-700');
         inquiryTab.classList.add('bg-turquoise', 'text-white');
         reservationTab.classList.remove('bg-turquoise', 'text-white');
         reservationTab.classList.add('bg-gray-200', 'text-gray-700');
         
-        // フィールドの表示/非表示
-        reservationFields.classList.add('hidden');
-        inquiryFields.classList.remove('hidden');
-        reservationMessageField.classList.add('hidden');
+        // お問い合わせカードのタブスタイル変更
+        inquiryTabContact.classList.remove('bg-gray-200', 'text-gray-700');
+        inquiryTabContact.classList.add('bg-turquoise', 'text-white');
+        reservationTabContact.classList.remove('bg-turquoise', 'text-white');
+        reservationTabContact.classList.add('bg-gray-200', 'text-gray-700');
         
-        // フォームタイプの設定
-        formTypeInput.value = 'inquiry';
-        
-        // 必須フィールドの設定
-        toggleRequiredFields(false);
-    });
-    
-    // 予約フィールドの必須属性を切り替える関数
-    function toggleRequiredFields(isReservation) {
-        const reservationRequiredFields = [
-            document.getElementById('furigana'),
-            document.getElementById('postal-code'),
-            document.getElementById('address'),
-            document.getElementById('check-in-date'),
-            document.getElementById('check-in-time')
-        ];
-        
-        const inquiryMessageField = document.getElementById('inquiry-message');
-        
-        if (isReservation) {
-            // 予約モードの場合
-            reservationRequiredFields.forEach(field => {
-                if (field) field.required = true;
-            });
-            if (inquiryMessageField) inquiryMessageField.required = false;
-        } else {
-            // お問い合わせモードの場合
-            reservationRequiredFields.forEach(field => {
-                if (field) field.required = false;
-            });
-            if (inquiryMessageField) inquiryMessageField.required = true;
-        }
+        // フォームの表示/非表示
+        reservationWrapper.classList.add('hidden');
+        contactWrapper.classList.remove('hidden');
     }
     
+    // タブクリックイベントの設定
+    reservationTab.addEventListener('click', showReservationForm);
+    reservationTabContact.addEventListener('click', showReservationForm);
+    inquiryTab.addEventListener('click', showContactForm);
+    inquiryTabContact.addEventListener('click', showContactForm);
+    
     // 初期状態は予約タブを選択状態にする
-    reservationTab.click();
+    showReservationForm();
 });
